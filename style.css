@@ -13,3 +13,190 @@ Text Domain: adt
 This theme is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+
+@font-face {
+    font-family:'nexa_bold';
+    src: url('css/font/nexa_bold-webfont.eot');
+    src: url('css/font/nexa_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('css/font/nexa_bold-webfont.woff') format('woff'),
+         url('css/font/nexa_bold-webfont.ttf') format('truetype'),
+         url('css/font/nexa_bold-webfont.svg#nexa_boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:'nexa_light';
+    src: url('css/font/nexa_light-webfont.eot');
+    src: url('css/font/nexa_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('css/font/nexa_light-webfont.woff') format('woff'),
+         url('css/font/nexa_light-webfont.ttf') format('truetype'),
+         url('css/font/nexa_light-webfont.svg#nexa_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{padding:0; margin:0; font-family:'nexa_light'; background:#f4f9f9; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+a{color:black;}
+a:hover{text-decoration:none; color:black}
+
+h1{font-size:58px; line-height:60px; font-weight:normal}
+h2{font-weight:normal}
+video {
+}
+
+/* utils */
+.width670{width:670px;}
+.text{line-height:24px; font-size:18px}
+ul.reset{list-style:none; margin:0; padding:0}
+.actions i{font-size:22px}
+.margin_top_50{margin-top:50px}
+.margin_top_30{margin-top:30px}
+.margin_top_100{margin-top:100px}
+.margin_top_10{margin-top:10px}
+.margin_right_30{margin-right:30px}
+.margin_bottom_30{margin-bottom:30px}
+.margin_right_300{margin-right:300px}
+.margin_left_10{margin-left:10px}
+.float_01{float:left; min-height:1px;}
+.btn_01{width:70px; height:70px; background:#000000; display:block; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; line-height:70px; font-size:17px; color:white; text-align:center}
+.btn_01.blue{background:#6fe3fd;}
+.btn_01.red{background:#a60201;}
+.btn_01 i{font-size:30px; line-height:74px}
+.btn_02{width:50px; height:50px; background:black; display:block; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; line-height:53px; font-size:12px; color:white; text-align:center}
+
+.go_left_50{margin-left:-200%; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+
+.mono{font-family:"Lucida Console", Monaco, monospace}
+.relative{position:relative}
+
+/* video */
+.video .body{margin-top:28px}
+.video .main_menu{text-align:center}
+.video .main_menu li{margin-bottom:15px}
+.action_icons li{width:50%; text-align:center; float:left; font-size:25px}
+
+.list_01 h1{font-size:20px; line-height:28px}
+.list_01 article{height:356px}
+
+/* home */
+.container_home{
+	top: 40%;
+    left: 0;
+    right:0;
+    margin-top: -205px;
+    position: absolute;
+    height: 410px;
+    text-align:center;
+}
+.container_home.centrar{
+	top:50%;
+    height: 170px;
+    margin-top: -85px;
+	}
+.logo_home{
+    height: 205px;
+    width: 205px;
+    margin:0 auto;
+	background:url(img/adtltd_logo_onda.png);
+}
+.home #loginform{margin-top: 150px}
+.home #loginform p{position:relative; text-align:center; height:60px}
+.home #loginform p label{position:absolute; top:25px; right:0; left:0; font-size:22px; line-height:24px}
+.home #loginform p input[type="text"], .home #loginform p input[type="password"]{border:none; border-bottom: 1px solid black; border-radius:0; -moz-border-radius:0; -webkit-border-radius:0; background:none; width:100%; text-align:center; padding:0px; font-family:'nexa_light'; font-size:18px}
+.home #loginform p input[type="text"]#user_login:-webkit-autofill, .home #loginform p input[type="password"]#user_pass:-webkit-autofill{-webkit-box-shadow:0 0 0 50px #f4f9f9 inset; -webkit-text-fill-color: black;}
+.home #loginform p.login-submit input[type="submit"]{background:black; width:60px; height:60px; padding:0; color:white; border:none; border-radius:30px; -moz-border-radius:30px; -webkit-border-radius:30px; margin-top:50px}
+.home #loginform p.login-remember{display:none}
+.home footer{position:fixed; bottom:0; right:0; left:0}
+
+/* menus */
+.menu_01{display:none}
+
+#menu-menu_footer li{display: inline-block; margin-right:10px; font-size:11px}
+#menu-menu_footer li a{color:#6e7d86}
+
+.menu_right{position:fixed; top:0; bottom:0; right:0; margin-right:-100%; width:100%}
+.menu_right.pushed{margin-right:0; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+.menu_black{background:black; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease; color:white}
+.menu_black .close_menu_black{width:23px; height:24px; display:block; background:url(img/sprites.png); position:absolute; right:0; top:50px}
+
+/* video contenedor */
+.video_contenedor{position:relative}
+.video_contenedor .menu_video{position:absolute; top:50%; left:50%; margin-top:-25px; margin-left:60px}
+
+/* comments */
+#comments{margin-top:75px}
+#comments .text{background:white; padding:25px 25px 15px 25px; font-size:14px; line-height:19px}
+#comments h3#reply-title{margin:0}
+#comments .form-submit{width:170px}
+
+/* form */
+.form_01 label{float:none; padding:0; font-size:24px; line-height:28px; margin-bottom:15px; display: block}
+.form_01 li{margin-top:40px; margin-bottom:20px}
+.form_01 .field{padding-top: 40px}
+.form_01 .description{font-size:14px}
+.form_01 input[type="text"], .form_01 input[type="password"]{width:100%; padding:10px 20px; border:none; border-bottom:3px solid #ecf1f1; border-right:2px solid #ecf1f1; background:white; -webkit-appearance: none;}
+.form_01 textarea{border:none; border-bottom:3px solid #ecf1f1; border-right:2px solid #ecf1f1; padding:20px; background:white}
+.form_01 .progress{height:1px; background:black; margin-top:34px}
+.form_01 .progress .bar{background:#6fe3fd}
+.form_01 #wpuf-attachment-upload-pickfiles{position:relative}
+.form_01 input[type=submit]{background:#6fe3fd; color:white; border:none; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; width:100%; padding:5px 0 5px 10px; text-align:left; display:none}
+.form_01.usuario input[type=submit], #comments .form_01 input[type=submit]{display:block}
+
+.form_02 textarea{background:#282828; border:none; width:100%; height:65px; font-size:11px; color:#ccc; padding:30px 30px 10px 30px; overflow:hidden}
+.form_02 .descripcion{font-size:18px; color:#ccc}
+.form_02 input{background:#282828; width:100%; padding:20px 30px; border:none; color:#ccc}
+.form_02 .social li{display: inline-block; margin-right: 10px;}
+.form_02 .social li a{color:white; background: #282828;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+text-align: center;
+font-size: 20px;
+display:block;
+line-height: 54px;}
+.form_02 .social li.so_facebook a:hover{background:#3B5998}
+.form_02 .social li.so_twitter a:hover{background:#4099FF}
+.form_02 .social li.so_google-plus a:hover{background:#d34836}
+.form_02 .social li.so_tumblr a:hover{background:#2f4b66}
+.form_02 .social li.so_pinterest a:hover{background:#910101}
+.form_02 label{color:#ccc}
+.span6 .form_02 textarea, .span6 .form_02 input{width:510px}
+.form_02 .span1 input{padding:0px; width:50px; padding:2px 10px; font-size:12px}
+.form_02 h2{font-size:24px}
+
+/* author */
+.author_line{margin-top:30px; margin-bottom:40px}
+.author_link{border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:70px; height:70px; display:block}
+.author_link img{opacity:0;filter: alpha(opacity=0);}
+.author_line h1 i{font-size:10px}
+.author_line h1{margin-top:5px}
+.author_line .web{display:block; font-size:18px; margin:-5px 0 20px 0}
+
+.twitter h3{font-size:18px; display:inline-block; background:white; padding:10px 20px 0 20px; margin:0; line-height:24px} 
+.twitter ul{background:white; padding:20px 24px; font-size:13px}
+.twitter ul li{margin-bottom:18px}
+.twitter ul li .user{}
+.twitter h3 i{margin-right:10px; font-size:16px;}
+.twitter a.user{color:#15aebe; border-bottom:none}
+.twitter a{border-bottom:1px solid #d4fbff}
+.twitter a:hover{border-bottom:1px solid #333}
+
+/* global */
+time{font-size:12px}
+footer{background:#151d22; padding:20px 0; margin-top:100px}
+.home footer{padding:0px;}
+
+.chat{background:white; padding:25px; height:457px}
+
+
+header.logo{background:url(img/adt_logo.png); width:70px; height:70px; position:absolute; left:30px; top:30px}
+
+/* expand bootstrap */
+.form_01 .span7 input[type="text"], .form_01 .span7 textarea, .form_01.span7 textarea{width:630px}
+.form_01 .span8 input[type="text"], .form_01 .span8 textarea, .form_01 .span8 input[type="password"]{width:730px}
+.span9_eat_gutter{width:900px}
+.remove_margin{margin-left:0px}
+.row-fluid .span1_of_3{width:33.33333333333%; margin-left:0px}
+.row-fluid .span1_of_4{width:25%; margin-left:0px}
+
