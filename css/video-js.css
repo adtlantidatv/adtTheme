@@ -1,8 +1,3 @@
-/*!
-Video.js Default Styles (http://videojs.com)
-Version GENERATED_AT_BUILD
-*/
-
 /*
 REQUIRED STYLES (be careful overriding)
 ================================================================================ */
@@ -160,6 +155,16 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+    font-family:'nexa_light';
+    src: url('font/nexa_light-webfont.eot');
+    src: url('font/nexa_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/nexa_light-webfont.woff') format('woff'),
+         url('font/nexa_light-webfont.ttf') format('truetype'),
+         url('font/nexa_light-webfont.svg#nexa_lightregular') format('svg');
+    font-weight: lighter;
+    font-style: lighter;
+}
 
 .vjs-default-skin {
   color: #ccc;
@@ -251,22 +256,23 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
 .vjs-default-skin .vjs-menu-group .vjs-menu-button{margin-left:20px}
 
 /* FontAwsome button icons */
-.vjs-default-skin .vjs-control:before {
+.vjs-default-skin .vjs-menu-group .vjs-control:before {
+  background:black;
+  background:rgba(0,0,0,0.6);
+  border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
   font-family: FontAwesome;
-  font-size: 1.5em;
+  font-size: 11px;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   text-align: center;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
 /* Replacement for focus outline */
-.vjs-default-skin .vjs-control:focus:before,
-.vjs-default-skin .vjs-control:hover:before {
-  text-shadow: 0em 0em 1em rgba(255, 255, 255, 1);
+.vjs-default-skin .vjs-menu-group .vjs-control:focus:before,
+.vjs-default-skin .vjs-menu-group .vjs-control:hover:before {
 }
 
 .vjs-default-skin .vjs-control:focus { /*  outline: 0; */ /* keyboard-only users cannot see the focus on several of the UI elements when this is set to 0 */ }
@@ -353,7 +359,7 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
 
 /* Menu Group
 -------------------------------------------------------------------------------- */
-.vjs-default-skin .vjs-menu-group{position:absolute; top:50%; left:50%; margin-top:-47px; margin-left:-107px}
+.vjs-default-skin .vjs-menu-group{position:absolute; top:50%; left:50%; margin-top:-47px; margin-left:-117px}
 
 
 /* Fullscreen
@@ -363,8 +369,6 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   height:50px;
   cursor: pointer;
   float: left;
-  border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
-  background:black;
   display:block;
   margin-top:22px;
 }
@@ -383,8 +387,6 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   height:50px;
   cursor: pointer;
   float: left;
-  border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
-  background:black;
   display:block;
   margin-top:22px;
 }
@@ -395,32 +397,32 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
 
 /* Subtitles Button */
 .vjs-default-skin .vjs-subtitles-button:before { content: "\e00c"; }
-
-/* There's unfortunately no CC button in FontAwesome, so we need
-    to use another font. Please +1 the fontawesome request.
-    https://github.com/FortAwesome/Font-Awesome/issues/968 */
 .vjs-default-skin .vjs-captions-button:before {
   content: "cc";
 }
 
 /* Play/Pause
 -------------------------------------------------------------------------------- */
-.vjs-default-skin .vjs-play-control {
+.vjs-default-skin .vjs-menu-group .vjs-play-control {
   width:94px;
   height:94px;
   cursor: pointer;
   float: left;
+  background:rgba(0,0,0,0.8);
   border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
-  background:black;
   display:block;
-  margin-right:15px
+  margin-right:35px;
 }
-.vjs-default-skin .vjs-play-control:before {
-  content: "\F04B"; /* Play Icon */
+.vjs-default-skin .vjs-menu-group .vjs-play-control:before {
+	font-family: 'nexa_light';
+	content: "play!"; /* Play Icon */
 	line-height:94px;
+	font-size: 20px;
 }
-.vjs-default-skin.vjs-playing .vjs-play-control:before {
-  content: "\F04C"; /* Pause Icon */
+.vjs-default-skin.vjs-playing .vjs-menu-group .vjs-play-control:before {
+	font-family: 'nexa_light';
+  	content: "pause"; /* Pause Icon */
+  	font-size: 20px;
 }
 
 /* Volume/Mute
@@ -431,8 +433,6 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   height:50px;
   cursor: pointer;
   float: left;
-  border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
-  background:black;
   display:block;
   margin-top:22px;
   line-height: 50px;
@@ -497,10 +497,6 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   left: -4em;
 }
 
-/*.vjs-default-skin .vjs-menu-button .vjs-volume-control {
-  height: 1.5em;
-}*/
-
 
 /* Loading Spinner
 ---------------------------------------------------------*/
@@ -508,50 +504,29 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   display: none;
   position: absolute;
   top: 50%;
-  left: 50%;
-
-  font-size: 5em;
-  line-height: 1;
-
-  width: 1em;
-  height: 1em;
-
-  margin-left: -0.5em;
-  margin-top: -0.5em;
+  left: 30px;
+  line-height: 26px;
+  width: 26px;
+  height: 26px;
+  margin-left: -18px;
+  margin-top: -18px;
+  border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
 
   opacity: 0.75;
-
+  background:rgba(0,0,0,0.7);
   -webkit-animation: spin 1.5s infinite linear;
      -moz-animation: spin 1.5s infinite linear;
        -o-animation: spin 1.5s infinite linear;
           animation: spin 1.5s infinite linear;
+	padding:10px;
 }
 
 .vjs-default-skin .vjs-loading-spinner:before {
-  content: "\e00a"; /* Loading spinner icon */
-  font-family: FontAwesome;
-
-  position: absolute;
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  text-shadow: 0em 0em 0.1em #000;
-}
-
-/* Add a gradient to the spinner by overlaying another copy.
-   Text gradient plus a text shadow doesn't work
-   and `background-clip: text` only works in Webkit. */
-.vjs-default-skin .vjs-loading-spinner:after {
-  content: "\e00a"; /* Loading spinner icon */
-  font-family: FontAwesome;
-
-  position: absolute;
-  width: 1em;
-  height: 1em;
-  text-align: center;
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	content:url(spinner.png);
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	text-align: center;
 }
 
 @-moz-keyframes spin {
@@ -584,6 +559,7 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   float: left;
   border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
   background:black;
+  background:rgba(0,0,0,0.5);
   display:block;
   margin-top:32px;
   line-height: 30px;
@@ -608,11 +584,12 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
 
 /* Button Pop-up Menu */
 .vjs-default-skin .vjs-menu-button .vjs-menu .vjs-menu-content {
+  font-family: 'nexa_light';
   display: block;
   padding: 0; margin: 0;
   position: absolute;
   width: 80px;
-  bottom: 10px; /* Same bottom as vjs-menu border-top */
+  bottom: 9px; /* Same bottom as vjs-menu border-top */
   max-height: 15em;
   overflow: auto;
   border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;
@@ -631,7 +608,7 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   margin: 0;
   padding: 0.3em 0 0.3em 0;
   line-height: 1.4em;
-  font-size: 1.2em;
+  font-size: 11px;
   font-weight: normal;
   text-align: center;
   text-transform: lowercase;

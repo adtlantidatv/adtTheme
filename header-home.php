@@ -20,3 +20,35 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<nav id="menu_principal" class="menu_left menu_black">
+		<div class="container relative">
+			<div class="row">
+			
+			<?php 
+			if ( is_user_logged_in() ) {
+				global $current_user;
+				?>
+				<div class="span6">
+					<div class="margin_top_100">
+						<h1><?php _e('Panel', 'adt'); ?></h1>
+						<ul class="clean_ul">
+							<li><a href="<?php echo get_author_posts_url($current_user->ID); ?>"><?php _e('Os meus arquivos', 'adt'); ?></a></li>
+							<li><a href="/subir" title="<?php _e('Subir un video', 'adt'); ?>" target="_blank"><?php _e('Subir un video', 'adt'); ?></a></li>
+						</ul>
+					</div>
+				</div>
+			<?php } ?>			
+			
+				<div class="span6">
+					<div class="margin_top_100">
+						<h1><?php _e('Adtlantida.tv', 'adt'); ?></h1>
+						<?php wp_nav_menu( array('theme_location' => 'footer', 'menu_class' => 'reset') ); ?>
+			
+						<a href="#" class="close_menu_black" title="cerrar menu"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div>

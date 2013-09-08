@@ -11,9 +11,7 @@ get_header();
 
 	<div class="row margin_top_50">
 		<div class="span1">
-			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo.png" alt="<?php _e('Adtlantida.tv menu logo'); ?>" />
-			</a>
+			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="btn_01"></a>
 			
 			<?php $log_user_id = get_current_user_id(); ?>			
 			<?php  

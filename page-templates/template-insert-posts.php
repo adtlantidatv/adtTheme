@@ -8,18 +8,14 @@ get_header();
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-	<div class="row margin_top_50">
-		<div class="span1">
-			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo.png" alt="<?php _e('Adtlantida.tv menu logo'); ?>" />
-			</a>
-		</div>
-		
-		<div class="span11">
+	<div class="row margin_top_220 margin_bottom_30 subir_video">		
+		<div class="span12">
 			<h1>
 				<?php the_title(); ?>
 			</h1>
-			<div class="margin_right_300 text">
+		</div>
+		<div class="span8 offset2">
+			<div class="text">
 				<?php echo get_post_meta($post->ID, 'adt_excerpt', true); ?>
 			</div>
 		</div>

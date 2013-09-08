@@ -9,10 +9,27 @@ function adt_post_types_init() {
 	$labels = array(
 		'name' => __( 'Streams' ),
 		'singular_name' => __( 'Stream' ),
-		'add_new_item' => _x( 'Add New Stream', 'axouxere' )
+		'add_new_item' => _x( 'Add New Stream', 'adt' )
 	);
 	register_post_type(
 		'streams',
+		array(
+			'labels' => $labels,
+			'public' => true,
+			'has_archive' => true,
+			'menu_position' => 5,
+			'supports' => array('title', 'editor', 'thumbnail')
+		)
+	);
+
+	// Colaboradores Post Type
+	$labels = array(
+		'name' => __( 'Collaborators' ),
+		'singular_name' => __( 'Collaborator' ),
+		'add_new_item' => _x( 'Add new collaborator', 'adt' )
+	);
+	register_post_type(
+		'collaborator',
 		array(
 			'labels' => $labels,
 			'public' => true,
@@ -67,6 +84,41 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'name' => 'Stream url other',
 				'desc' => '',
 				'id'   => $prefix . 'stream_url_other',
+				'type' => 'text',
+			),
+		),
+	);
+
+	$meta_boxes[] = array(
+		'id'         => 'Collaborators metabox',
+		'title'      => __('Collaborator info'),
+		'pages'      => array( 'collaborator' ), // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_names' => true, // Show field names on the left
+		'fields'     => array(
+			array(
+				'name' => 'web',
+				'desc' => '',
+				'id'   => $prefix . 'web_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'facebook',
+				'desc' => '',
+				'id'   => $prefix . 'facebook_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'twitter',
+				'desc' => '',
+				'id'   => $prefix . 'twitter_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'google +',
+				'desc' => '',
+				'id'   => $prefix . 'google_url',
 				'type' => 'text',
 			),
 		),

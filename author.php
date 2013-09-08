@@ -7,9 +7,7 @@
 	
 	<div class="span2">
 		<div class="float_01">
-			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo.png" alt="<?php _e('Adtlantida.tv menu logo'); ?>" />
-			</a>
+			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="btn_01"></a>
 		</div>
 
 		<div class="float_01 margin_left_10">
@@ -63,36 +61,23 @@
 			$mp4s = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/mp4', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 			$oggs = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/ogg', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 		?>
-		<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" width="390" height="220" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
+		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
 			<?php if($webms){ ?>
-		    <source src="<?php echo wp_get_attachment_url( reset($webms)->ID ); ?>" type="video/webm">
+				<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+			<?php }else{ ?>
+				<div class="relative">
+					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+					<div class="converting">
+						<div class="estado"><?php _e('convertindo...', 'adt'); ?></div>
+						<div class="adt_loading animation_spin"></div>
+					</div>
+				</div>
 			<?php } ?>
-			<?php if($mp4s){ ?>
-		    <source src="<?php echo wp_get_attachment_url( reset($mp4s)->ID ); ?>" type="video/mp4">
-			<?php } ?>
-			<?php if($oggs){ ?>
-		    <source src="<?php echo wp_get_attachment_url( reset($oggs)->ID ); ?>" type="video/ogg">
-			<?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_mp4', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_mp4', true); ?>" type="video/mp4">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_webm', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_webm', true); ?>" type="video/webm">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_ogv', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_ogv', true); ?>" type="video/ogg">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_other', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_other', true); ?>">
-		    <?php } ?>
-		    <p class="warning">Your browser does not support HTML5 video.</p>
-		</video>
-		
-		<h1 class="margin_right_30">
-			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
+			
+			<h1 class="margin_right_30">
 				<?php the_title(); ?>
-			</a>
-		</h1>
+			</h1>
+		</a>
 	</article>
 	<?php	
 	endwhile;

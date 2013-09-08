@@ -9,7 +9,6 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: light, white, one-column, two-columns, right-sidebar, flexible-width, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 Text Domain: adt
-
 This theme is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
@@ -37,8 +36,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 }
 
 body{padding:0; margin:0; font-family:'nexa_light'; background:#f4f9f9; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+body.black{background:black; color:white}
+
 a{color:black;}
 a:hover{text-decoration:none; color:black}
+.black a, .black a:hover{color:white;}
 
 h1{font-size:58px; line-height:60px; font-weight:normal}
 h2{font-weight:normal}
@@ -50,25 +52,35 @@ video {
 .text{line-height:24px; font-size:18px}
 ul.reset{list-style:none; margin:0; padding:0}
 .actions i{font-size:22px}
-.margin_top_50{margin-top:50px}
-.margin_top_30{margin-top:30px}
-.margin_top_100{margin-top:100px}
 .margin_top_10{margin-top:10px}
+.margin_top_20{margin-top:20px}
+.margin_top_30{margin-top:30px}
+.margin_top_50{margin-top:50px}
+.margin_top_100{margin-top:100px}
+.margin_top_220{margin-top:220px}
 .margin_right_30{margin-right:30px}
 .margin_bottom_30{margin-bottom:30px}
+.margin_bottom_5{margin-bottom:5px}
 .margin_right_300{margin-right:300px}
 .margin_left_10{margin-left:10px}
+.padding_30{padding:30px}
 .float_01{float:left; min-height:1px;}
 .btn_01{width:70px; height:70px; background:#000000; display:block; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; line-height:70px; font-size:17px; color:white; text-align:center}
 .btn_01.blue{background:#6fe3fd;}
 .btn_01.red{background:#a60201;}
+.btn_01.white{background:#ffffff}
 .btn_01 i{font-size:30px; line-height:74px}
 .btn_02{width:50px; height:50px; background:black; display:block; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; line-height:53px; font-size:12px; color:white; text-align:center}
 
 .go_left_50{margin-left:-200%; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+.go_right_100{margin-right:-200%; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease; overflow:hidden}
 
 .mono{font-family:"Lucida Console", Monaco, monospace}
 .relative{position:relative}
+.clean_ul{list-style:none; margin:0; padding:0}
+.clean_li{list-style:none}
+
+.adt_loading{width:94px; height:94px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; background:white url(img/adt_tilde.png) center center no-repeat; position:absolute; top:50%; left:50%; margin-top:-50px; margin-left:-47px;}
 
 /* video */
 .video .body{margin-top:28px}
@@ -76,8 +88,17 @@ ul.reset{list-style:none; margin:0; padding:0}
 .video .main_menu li{margin-bottom:15px}
 .action_icons li{width:50%; text-align:center; float:left; font-size:25px}
 
+/* video edit */
+.editar_video h1 span{color:#a60201}
+
+/* video upload */
+.subir_video h1{text-align:center}
+
 .list_01 h1{font-size:20px; line-height:28px}
 .list_01 article{height:356px}
+.list_01 .converting{background:black; background:rgba(0,0,0,0.7); width:390px; height:220px; position:absolute; top:0; text-align:center}
+.list_01 .converting .adt_loading{width:50px; height:50px; margin-top:-25px; margin-left:-25px; background-image: url(img/adt_tilde_28.png)}
+.list_01 .converting .estado{color:white; font-size:12px; margin-top:155px}
 
 /* home */
 .container_home{
@@ -112,23 +133,37 @@ ul.reset{list-style:none; margin:0; padding:0}
 /* menus */
 .menu_01{display:none}
 
-#menu-menu_footer li{display: inline-block; margin-right:10px; font-size:11px}
-#menu-menu_footer li a{color:#6e7d86}
-
 .menu_right{position:fixed; top:0; bottom:0; right:0; margin-right:-100%; width:100%}
+.menu_left{position:fixed; top:0; bottom:0; left:0; margin-left:-100%; width:100%;}
 .menu_right.pushed{margin-right:0; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
+.menu_left.pushed{margin-left:0; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease;}
 .menu_black{background:black; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; transition: all 0.5s ease; color:white}
+.menu_black a{color:white}
 .menu_black .close_menu_black{width:23px; height:24px; display:block; background:url(img/sprites.png); position:absolute; right:0; top:50px}
+.menu_left ul li a{font-size:18px}
+.menu_left ul li{margin-bottom:5px}
 
 /* video contenedor */
 .video_contenedor{position:relative}
 .video_contenedor .menu_video{position:absolute; top:50%; left:50%; margin-top:-25px; margin-left:60px}
+
+/* single */
+#converting{position:absolute; background:black; background:rgba(0,0,0,0.9); top:0; right:0; left:0; bottom:0; z-index:900}
+.converting_text{width:565px; margin:300px auto 0 auto; color:white}
+.converting_title{font-size:36px; line-height:40px}
+.converting_descrip{font-size:18px; margin-top:32px}
+.converting_descrip a{color:white; margin-left:10px}
+.converting_descrip a i{font-size:14px}
+.converting_descrip p{margin-bottom:0}
 
 /* comments */
 #comments{margin-top:75px}
 #comments .text{background:white; padding:25px 25px 15px 25px; font-size:14px; line-height:19px}
 #comments h3#reply-title{margin:0}
 #comments .form-submit{width:170px}
+
+/* colaboradores */
+.listado_colaboradores i{color:#79e2fd; margin-left:5px}
 
 /* form */
 .form_01 label{float:none; padding:0; font-size:24px; line-height:28px; margin-bottom:15px; display: block}
@@ -139,9 +174,14 @@ ul.reset{list-style:none; margin:0; padding:0}
 .form_01 textarea{border:none; border-bottom:3px solid #ecf1f1; border-right:2px solid #ecf1f1; padding:20px; background:white}
 .form_01 .progress{height:1px; background:black; margin-top:34px}
 .form_01 .progress .bar{background:#6fe3fd}
-.form_01 #wpuf-attachment-upload-pickfiles{position:relative}
+.form_01 #wpuf-attachment-upload-pickfiles{position:absolute; top:0}
+.form_01 #wpuf-attachment-upload-pickfiles:hover{color:#79e2fd}
 .form_01 input[type=submit]{background:#6fe3fd; color:white; border:none; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; width:100%; padding:5px 0 5px 10px; text-align:left; display:none}
+.form_01 input[type=submit].wpuf_submit{width:100px}
 .form_01.usuario input[type=submit], #comments .form_01 input[type=submit]{display:block}
+.progress_circle canvas{margin-top:-10px; margin-left:-10px}
+.form_01 .upload_row{position: absolute; top:60px}
+.editar_video .form_01 input[type=submit]{display:inline-block}
 
 .form_02 textarea{background:#282828; border:none; width:100%; height:65px; font-size:11px; color:#ccc; padding:30px 30px 10px 30px; overflow:hidden}
 .form_02 .descripcion{font-size:18px; color:#ccc}
@@ -184,13 +224,55 @@ line-height: 54px;}
 
 /* global */
 time{font-size:12px}
-footer{background:#151d22; padding:20px 0; margin-top:100px}
+footer{background:#151d22; padding:0 0; margin-top:100px}
 .home footer{padding:0px;}
+#adt_menu{background: black url(img/adt_tilde_blanca_43.png) center center no-repeat;}
+.black #adt_menu{background: white url(img/adt_tilde_black_43.png) center center no-repeat;}
 
 .chat{background:white; padding:25px; height:457px}
 
-
 header.logo{background:url(img/adt_logo.png); width:70px; height:70px; position:absolute; left:30px; top:30px}
+
+/* animations */
+.animation_spin{
+	-webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 4000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 4000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
 
 /* expand bootstrap */
 .form_01 .span7 input[type="text"], .form_01 .span7 textarea, .form_01.span7 textarea{width:630px}

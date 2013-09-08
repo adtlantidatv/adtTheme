@@ -12,7 +12,9 @@ get_header('home'); ?>
 		<div class="span1 offset4"><a href="#" class="btn_01 margin_top_50"><?php _e('info', 'adt'); ?></a></div>
 		-->
 		<div class="offset5 span2">
-			<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo_index.png ?>" />
+			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="home_adt_menu">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo_index.png ?>" />
+			</a>
 			<?php if ( !is_user_logged_in() ) {?> 
 				<?php wp_login_form( array('label_username' => __( 'user' ), 'label_password' => __( 'pass' ), 'label_log_in' => __('bucea'), 'remember' => true, 'value_remember' => true) ); ?>
 			<?php } ?>

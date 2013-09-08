@@ -9,27 +9,7 @@
 				$mp4s = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/mp4', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 				$oggs = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/ogg', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 			?>
-			<?php if(!$webms){ ?>
-			<div id="converting">
-				<div class="converting_text">
-					<div class="converting_title"><?php _e('O video ainda esta convertindose', 'adt'); ?></div>
-					<div class="converting_descrip">
-						<p><?php _e('Isto pode levarlle alguns minutos', 'adt'); ?></p>
-						<p><?php _e('Mira os teus videos, volve mais tarde ou preme en actualizar', 'adt'); ?>
-							<a href="javascript:location.reload(true);" title="<?php _e('actualiza a paxina', 'adt'); ?>">
-								<i class="icon-refresh"></i>
-							</a>
-						</p>
-					</div>
-				</div>
-				<div class="adt_loading animation_spin"></div>
-			</div>
-			<?php } ?>
 			<div id="video-post-<?php the_ID(); ?>" class="video_contenedor">
-				<?php 
-					$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'video_poster' );
-					$url = $thumb['0']; 
-				?>
 				<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" height="659" width="100%" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
 					<?php if($webms){ ?>
 				    <source src="<?php echo wp_get_attachment_url( reset($webms)->ID ); ?>" type="video/webm">
@@ -40,6 +20,18 @@
 					<?php if($oggs){ ?>
 				    <source src="<?php echo wp_get_attachment_url( reset($oggs)->ID ); ?>" type="video/ogg">
 					<?php } ?>
+					<?php if(get_post_meta($post->ID, 'adt_stream_url_mp4', true)){ ?>
+				    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_mp4', true); ?>" type="video/mp4">
+				    <?php } ?>
+					<?php if(get_post_meta($post->ID, 'adt_stream_url_webm', true)){ ?>
+				    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_webm', true); ?>" type="video/webm">
+				    <?php } ?>
+					<?php if(get_post_meta($post->ID, 'adt_stream_url_ogv', true)){ ?>
+				    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_ogv', true); ?>" type="video/ogg">
+				    <?php } ?>
+					<?php if(get_post_meta($post->ID, 'adt_stream_url_other', true)){ ?>
+				    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_other', true); ?>">
+				    <?php } ?>
 				    <p class="warning">Your browser does not support HTML5 video.</p>
 				</video>
 			</div>
@@ -50,7 +42,9 @@
 				<div class="span1">
 					<ul class="main_menu reset">
 						<li>
-							<a href="#" id="adt_menu" class="btn_01" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>"></a>
+							<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>">
+								<img src="<?php echo get_template_directory_uri(); ?>/img/adt_logo.png" alt="<?php _e('Adtlantida.tv menu logo'); ?>" />
+							</a>
 						</li>
 					
 						<li>
@@ -75,6 +69,7 @@
 						<li>
 							<ul class="reset action_icons">
 								<li><a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>"><i class="icon-gear"></i></a></li>
+								<li><a href="#"><i class="icon-remove-sign"></i></a></li>
 							</ul>
 						</li>
 						<?php } ?>
@@ -89,12 +84,10 @@
 				</div>
 				
 				<div class="span1">
-					<!--
 					<ul class="reset actions">
 						<li><i class="icon-heart"></i></li>
 						<li><i class="icon-comment"></i></li>
 					</ul>
-					-->
 				</div>
 			</div>
 			
