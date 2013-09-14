@@ -40,6 +40,39 @@ function adt_post_types_init() {
 	);
 }
 
+// __________ Custom taxonomies ____________________________________________
+add_action( 'init', 'adt_taxonomies_init' );
+
+function adt_taxonomies_init() {
+	$labels = array(
+		'name' => _x('Categories', 'taxonomy general name'),
+		'singular_name' => _x('Category', 'taxonomy singular name'),
+		'search_items' => __('Search Categories', 'adt'),
+		'popular_items' => __('Popular Categories', 'adt'),
+		'all_items' => __('All Categories', 'adt'),
+		'parent_item' => __('Parent Categories', 'adt'),
+		'parent_item_colon' => __('Parent Categories:', 'adt'),
+		'edit_item' => __('Edit Categories', 'adt'),
+		'update_item' => __('Update Category', 'adt'),
+		'add_new_item' => __('Add New Category', 'adt'),
+		'new_item_name' => __('New Category name', 'adt'),
+		'separate_items_with_commas' => __('Separate Categories with commas', 'adt'),
+		'add_or_remove_items' => __('Add or remove Categories', 'adt'),
+		'choose_from_most_used' => __('Choose from the most used Categories', 'adt'),
+		'menu_name' => __('Categories', 'adt')
+	);
+
+	register_taxonomy(
+		'categories', 
+		'collaborator', 
+		array(
+			'labels' => $labels,
+			'hierarchical' => true
+		)
+	);
+}
+
+
 /* Custom boxes */
 add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 
@@ -119,6 +152,12 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'name' => 'google +',
 				'desc' => '',
 				'id'   => $prefix . 'google_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'traduccion',
+				'desc' => 'a que idioma esta realizando a traduccion',
+				'id'   => $prefix . 'traduccion',
 				'type' => 'text',
 			),
 		),

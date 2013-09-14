@@ -53,3 +53,47 @@ function custom_mimes( $mimes ){
     return $mimes;
 }
 add_filter( 'upload_mimes', 'custom_mimes' );
+
+/* ******************************************************* */
+/* _____ Custom login ____________________________________ */
+/* _______________________________________________________ */
+
+/* _____ Style ___________________________________________ */
+function my_login_logo() { ?>
+	<link rel='stylesheet' id='adt_login_css'  href='<?php echo get_bloginfo( 'template_directory' ) ?>/css/login.css' type='text/css' media='all' />
+
+    <style type="text/css">
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
+/* _____ link ____________________________________________ */
+function loginpage_custom_link() {
+	return home_url();
+}
+add_filter('login_headerurl','loginpage_custom_link');
+
+/* _____ rollover link ___________________________________ */
+function change_title_on_logo() {
+	return 'Adtlantida.tv';
+}
+add_filter('login_headertitle', 'change_title_on_logo');
+
+
+/* ******************************************************* */
+/* _____ Mail ____________________________________________ */
+/* _______________________________________________________ */
+
+/* _____ mail from name __________________________________ */
+function adt_wp_mail_from_name( $email_from ){
+	return 'Adtlantida.tv';
+}
+add_filter( 'wp_mail_from_name', 'adt_wp_mail_from_name' );
+
+/* _____ mail from ______________________________________ */
+function adt_wp_mail_from( $email_address ){
+	return 'comunicacion@adtlantida.tv';
+}
+add_filter( 'wp_mail_from', 'adt_wp_mail_from' );
+
+

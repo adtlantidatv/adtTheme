@@ -170,8 +170,8 @@ ul.reset{list-style:none; margin:0; padding:0}
 .form_01 li{margin-top:40px; margin-bottom:20px}
 .form_01 .field{padding-top: 40px}
 .form_01 .description{font-size:14px}
-.form_01 input[type="text"], .form_01 input[type="password"]{width:100%; padding:10px 20px; border:none; border-bottom:3px solid #ecf1f1; border-right:2px solid #ecf1f1; background:white; -webkit-appearance: none;}
-.form_01 textarea{border:none; border-bottom:3px solid #ecf1f1; border-right:2px solid #ecf1f1; padding:20px; background:white}
+.form_01 input[type="text"], .form_01 input[type="password"]{width:100%; padding:10px 20px; border:none; border:1px solid #bfe1e1; background:white; -webkit-appearance: none;}
+.form_01 textarea{border:none; border:1px solid #bfe1e1; padding:20px; background:white; line-height:24px}
 .form_01 .progress{height:1px; background:black; margin-top:34px}
 .form_01 .progress .bar{background:#6fe3fd}
 .form_01 #wpuf-attachment-upload-pickfiles{position:absolute; top:0}
@@ -209,7 +209,7 @@ line-height: 54px;}
 .author_line{margin-top:30px; margin-bottom:40px}
 .author_link{border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:70px; height:70px; display:block}
 .author_link img{opacity:0;filter: alpha(opacity=0);}
-.author_line h1 i{font-size:10px}
+h1 i{font-size:11px}
 .author_line h1{margin-top:5px}
 .author_line .web{display:block; font-size:18px; margin:-5px 0 20px 0}
 
@@ -282,3 +282,9 @@ header.logo{background:url(img/adt_logo.png); width:70px; height:70px; position:
 .row-fluid .span1_of_3{width:33.33333333333%; margin-left:0px}
 .row-fluid .span1_of_4{width:25%; margin-left:0px}
 
+/* responsive */
+@media (max-width:1199px){
+	.btn_01, .author_link{width:62px; height:62px}
+	.span9_eat_gutter{width:720px}
+	.list_01 article{height:296px}
+}

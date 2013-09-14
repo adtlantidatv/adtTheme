@@ -67,22 +67,20 @@
 							<time><?php the_time('d.m.Y'); ?></time>
 						</li>
 						
-						<?php if ( current_user_can('edit_post', $post->ID) ) { ?>
-                        <?php
-                        $edit_page = (int) wpuf_get_option( 'edit_page_id', 'wpuf_others' );
-                        $url = get_permalink( $edit_page );
-                        ?>						
-						<li>
-							<ul class="reset action_icons">
-								<li><a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>"><i class="icon-gear"></i></a></li>
-							</ul>
-						</li>
-						<?php } ?>
 					</ul>
 				</div>
 				
 				<div class="span10">
-					<h1><?php the_title(); ?></h1>
+					<h1>
+						<?php the_title(); ?>
+						<?php if ( current_user_can('edit_post', $post->ID) ) {
+	                        $edit_page = (int) wpuf_get_option( 'edit_page_id', 'wpuf_others' );
+	                        $url = get_permalink( $edit_page );
+	                        ?>
+							<a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>" title="<?php _e('Edit post', 'adt'); ?>"><i class="icon-gear"></i></a>
+						<?php } ?>					
+
+					</h1>
 					<div class="width670 text">
 						<?php the_content(); ?>
 					</div>

@@ -377,7 +377,7 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
 	line-height:50px;
 }
 .vjs-default-skin.vjs-fullscreen .vjs-fullscreen-control:before {
-  content: "\e00b"; /* Exit full screen */
+  content: "\f066"; /* Exit full screen */
 }
 
 /* Share
@@ -408,7 +408,6 @@ so you can upgrade to newer versions easier. You can remove all these styles by 
   height:94px;
   cursor: pointer;
   float: left;
-  background:rgba(0,0,0,0.8);
   border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;
   display:block;
   margin-right:35px;

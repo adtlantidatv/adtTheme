@@ -1,0 +1,28 @@
+body.login{background:#f4f9f9}
+body.login div#login h1 a {
+	background-image: url(../img/adt_logo_index.png);
+	padding-bottom: 160px;
+}
+.login h1 a{background-size:auto}
+.login #login_error{background:#a60201; color:white}
+.login #login_error a{color:white}
+.login form{background:transparent; border:none; -webkit-box-shadow: none; box-shadow: none; padding:20px 0}
+.login form .input, .login input[type="text"]{border:none; border-top:1px solid black; background:none; border-radius:0px; text-align:center}
+.login input[type="submit"]{background: black;
+width: 100px;
+height: 100px !important;
+padding: 0;
+color: white;
+border: none;
+border-radius: 50px;
+-moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+margin: 50px auto 20px auto;
+float:none;
+display: block
+}
+.login label{text-align: center; display: block}
+.login form .forgetmenot{float:none}
+.login #nav, .login #backtoblog{text-align:center; padding:0 0 10px 0; color:black}
+.login #nav a, .login #backtoblog a{color:black !important}
+.wp-core-ui .button-primary:hover{background:black}
