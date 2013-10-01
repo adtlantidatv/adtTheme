@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php if ( have_posts() ) : ?>
+<?php if ( have_posts() ){ ?>
 <?php the_post(); ?>
 
 <div class="author_line row">
@@ -86,5 +86,44 @@
 	?>
 </div>
 
-<?php endif; ?>
+<?php }else{ ?>
+<div class="author_line row">
+	
+	<div class="span2">
+		<div class="float_01">
+			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="btn_01"></a>
+		</div>
+
+		<div class="float_01 margin_left_10">
+			<?php  
+				global $current_user;
+				get_currentuserinfo();
+				$html = get_avatar( $current_user->user_email, apply_filters( 'twentytwelve_author_bio_avatar_size', 70 ), null, __('author avatar', 'adt') );
+				$src = (string) reset(simplexml_import_dom(DOMDocument::loadHTML($html))->xpath("//img/@src"));
+			?>
+			<a href="<?php echo esc_url( get_author_posts_url( $current_user->ID ) ); ?>" rel="author" class="author_link" style="background-image:url(<?php echo $src; ?>)">
+				<?php echo get_avatar( $current_user->user_email, apply_filters( 'twentytwelve_author_bio_avatar_size', 70 ), null, __('author avatar', 'adt') ); ?>
+			</a>
+		</div>
+	</div>
+	
+	<div class="span9_eat_gutter remove_margin">
+		<h1>
+			<a class="url fn n" href="<?php echo get_author_posts_url( $current_user->ID ); ?>" title="<?php echo esc_attr($current_user->display_name); ?>" rel="me">
+				<?php echo $current_user->display_name; ?>
+			</a>
+			<?php if ( current_user_can('publish_posts') ) { ?>
+			<a href="/editar-autor"><i class="icon-gear"></i></a>
+			<?php } ?>					
+		</h1>
+		<?php _e('Esta &eacute; a t&uacute;a p&aacute;xina, onde atopar&aacute;s os teus arquivos. Podes subir un novo v&iacute;deo no bot&oacute;n azul da dereita, que ten unha icona de nube. Tam&eacute;n podes mudar a t&uacute;a informaci&oacute;n no pequeno bot&oacute;n con forma de roda dentada que est&aacute; ao lado do teu nome.'); ?>
+	</div>
+	
+	<div class="span1">
+		<?php if ( is_user_logged_in() ) { ?>
+		<a href="/subir" class="blue btn_01" title="<?php _e('Upload a video', 'adt'); ?>"><i class="icon-cloud-upload"></i></a>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
 <?php get_footer(); ?>

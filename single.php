@@ -30,7 +30,7 @@
 					$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'video_poster' );
 					$url = $thumb['0']; 
 				?>
-				<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" height="659" width="100%" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
+				<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
 					<?php if($webms){ ?>
 				    <source src="<?php echo wp_get_attachment_url( reset($webms)->ID ); ?>" type="video/webm">
 					<?php } ?>

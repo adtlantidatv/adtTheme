@@ -13,8 +13,9 @@ if(isset($_GET["id"]) && $_GET["id"] != ""){
 		$mp4s = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/mp4', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 		$oggs = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/ogg', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
 		?>
+			<div id="video-post-<?php the_ID(); ?>" class="video_contenedor">
 		
-		<video class="video-js vjs-default-skin fullscreen" poster="<?php echo $url; ?>" height="659" width="100%" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
+		<video class="video-js vjs-default-skin fullscreen" poster="<?php echo $url; ?>" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
 			<?php if($webms){ ?>
 		    <source src="<?php echo wp_get_attachment_url( reset($webms)->ID ); ?>" type="video/webm">
 			<?php } ?>
@@ -24,21 +25,9 @@ if(isset($_GET["id"]) && $_GET["id"] != ""){
 			<?php if($oggs){ ?>
 		    <source src="<?php echo wp_get_attachment_url( reset($oggs)->ID ); ?>" type="video/ogg">
 			<?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_mp4', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_mp4', true); ?>" type="video/mp4">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_webm', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_webm', true); ?>" type="video/webm">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_ogv', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_ogv', true); ?>" type="video/ogg">
-		    <?php } ?>
-			<?php if(get_post_meta($post->ID, 'adt_stream_url_other', true)){ ?>
-		    <source src="<?php echo get_post_meta($post->ID, 'adt_stream_url_other', true); ?>">
-		    <?php } ?>
 		    <p class="warning">Your browser does not support HTML5 video.</p>
 		</video>
-	
+			</div>
 		<?php
 	endwhile;
 
