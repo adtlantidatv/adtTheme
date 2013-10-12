@@ -82,7 +82,7 @@ ul.reset{list-style:none; margin:0; padding:0}
 .clean_ul{list-style:none; margin:0; padding:0}
 .clean_li{list-style:none}
 
-.adt_loading{width:94px; height:94px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; background:white url(img/adt_tilde.png) center center no-repeat; position:absolute; top:50%; left:50%; margin-top:-50px; margin-left:-47px;}
+.adt_loading{width:94px; height:94px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; background:white url(img/adt_tilde.png) center center no-repeat; position:absolute; top:200px; left:50%; margin-top:-50px; margin-left:-47px;}
 
 /* video */
 .video .body{margin-top:28px}
@@ -99,7 +99,7 @@ ul.reset{list-style:none; margin:0; padding:0}
 .list_01 h1{font-size:20px; line-height:28px}
 .list_01 article{height:356px}
 .list_01 .converting{background:black; background:rgba(0,0,0,0.7); width:390px; height:220px; position:absolute; top:0; text-align:center}
-.list_01 .converting .adt_loading{width:50px; height:50px; margin-top:-25px; margin-left:-25px; background-image: url(img/adt_tilde_28.png)}
+.list_01 .converting .adt_loading{width:50px; height:50px; margin-top:-25px; margin-left:-25px; background-image: url(img/adt_tilde_28.png); top:50%}
 .list_01 .converting .estado{color:white; font-size:12px; margin-top:155px}
 
 /* home */
@@ -185,8 +185,9 @@ ul.reset{list-style:none; margin:0; padding:0}
 .form_01 input[type=submit].wpuf_submit{width:100px}
 .form_01.usuario input[type=submit], #comments .form_01 input[type=submit]{display:block}
 .progress_circle canvas{margin-top:-10px; margin-left:-10px}
-.form_01 .upload_row{position: absolute; top:60px}
+.form_01 .upload_row{position: absolute; top:100px; width:180px; margin:auto; left:50%; margin-left:-90px}
 .editar_video .form_01 input[type=submit]{display:inline-block}
+.form_01 .upload_row .uploadui{float:left; width:90px; height:90px}
 
 .form_02 textarea{background:#282828; border:none; width:100%; height:65px; font-size:11px; color:#ccc; padding:30px 30px 10px 30px; overflow:hidden}
 .form_02 .descripcion{font-size:18px; color:#ccc}
@@ -292,4 +293,5 @@ header.logo{background:url(img/adt_logo.png); width:70px; height:70px; position:
 	.btn_01, .author_link{width:62px; height:62px}
 	.span9_eat_gutter{width:720px}
 	.list_01 article{height:296px}
+	.form_01 .upload_row .uploadui .btn_01{float:left; width:70px; height:70px}
 }
