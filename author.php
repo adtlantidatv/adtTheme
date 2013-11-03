@@ -56,22 +56,23 @@
 		$query->the_post();
 	?>
 	<article class="span1_of_3">
-		<?php
-			$webms = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/webm', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-			$mp4s = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/mp4', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-			$oggs = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/ogg', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-		?>
+		<?php $files = getFilesUrlByType($post->ID); ?>
+		
 		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-			<?php if($webms){ ?>
-				<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
-			<?php }else{ ?>
+
+			<?php if($files['webm']==null && ($files['mp3']!=null && $files['ogg']!=null)){ ?>
 				<div class="relative">
 					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
 					<div class="converting">
 						<div class="estado"><?php _e('convertindo...', 'adt'); ?></div>
 						<div class="adt_loading animation_spin"></div>
 					</div>
-				</div>
+				</div>			
+		
+			<?php }else if($files['webm']!=null){ ?>
+				<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+			
+			<?php }else{ ?>
 			<?php } ?>
 			
 			<h1 class="margin_right_30">

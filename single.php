@@ -1,48 +1,57 @@
 <?php get_header(); ?>
 <?php while ( have_posts() ) : the_post(); ?>
+<?php $files = getFilesUrlByType($post->ID); ?>
+
 <div class="row">
 	<div class="span12">
 		<article class="video">
 			<div class="clearfix">
-			<?php
-				$webms = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/webm', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-				$mp4s = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/mp4', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-				$oggs = get_children(array('numberposts' => 1, 'post_mime_type' => 'video/ogg', 'post_parent' => $post->ID, 'post_type' => 'attachment'));
-			?>
-			<?php if(!$webms){ ?>
-			<div id="converting">
-				<div class="converting_text">
-					<div class="converting_title"><?php _e('O video ainda esta convertindose', 'adt'); ?></div>
-					<div class="converting_descrip">
-						<p><?php _e('Isto pode levarlle alguns minutos', 'adt'); ?></p>
-						<p><?php _e('Mira os teus videos, volve mais tarde ou preme en actualizar', 'adt'); ?>
-							<a href="javascript:location.reload(true);" title="<?php _e('actualiza a paxina', 'adt'); ?>">
-								<i class="icon-refresh"></i>
-							</a>
-						</p>
+							
+				<!-- Converting video -->
+				<?php if($files['webm']==null && ($files['mp3']!=null && $files['ogg']!=null)){ ?>
+					<div id="converting">
+						<div class="converting_text">
+							<div class="converting_title"><?php _e('O video ainda esta convertindose', 'adt'); ?></div>
+							<div class="converting_descrip">
+								<p><?php _e('Isto pode levarlle alguns minutos', 'adt'); ?></p>
+								<p><?php _e('Mira os teus videos, volve mais tarde ou preme en actualizar', 'adt'); ?>
+									<a href="javascript:location.reload(true);" title="<?php _e('actualiza a paxina', 'adt'); ?>">
+										<i class="icon-refresh"></i>
+									</a>
+								</p>
+							</div>
+						</div>
+						<div class="adt_loading animation_spin"></div>
 					</div>
-				</div>
-				<div class="adt_loading animation_spin"></div>
-			</div>
-			<?php } ?>
-			<div id="video-post-<?php the_ID(); ?>" class="video_contenedor">
-				<?php 
-					$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'video_poster' );
-					$url = $thumb['0']; 
-				?>
-				<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
-					<?php if($webms){ ?>
-				    <source src="<?php echo wp_get_attachment_url( reset($webms)->ID ); ?>" type="video/webm">
-					<?php } ?>
-					<?php if($mp4s){ ?>
-				    <source src="<?php echo wp_get_attachment_url( reset($mp4s)->ID ); ?>" type="video/mp4">
-					<?php } ?>
-					<?php if($oggs){ ?>
-				    <source src="<?php echo wp_get_attachment_url( reset($oggs)->ID ); ?>" type="video/ogg">
-					<?php } ?>
-				    <p class="warning">Your browser does not support HTML5 video.</p>
-				</video>
-			</div>
+				<?php } ?>
+				
+				<!-- video player -->
+				<?php if($files['webm']!=null){ ?>
+					<div id="video-post-<?php the_ID(); ?>" class="video_contenedor">
+						<?php 
+							$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'video_poster' );
+							$url = $thumb['0']; 
+						?>
+						<video class="video-js vjs-default-skin" poster="<?php echo $url; ?>" controls="" data-setup='{"controls":true}' id="video_<?php the_ID(); ?>">
+							<?php if($files['webm']){ ?>
+						    <source src="<?php echo $files['webm'] ?>" type="video/webm">
+							<?php } ?>
+							<?php if($files['mp4']){ ?>
+						    <source src="<?php echo $files['mp4']; ?>" type="video/mp4">
+							<?php } ?>-
+							<?php if($files['ogv']){ ?>
+						    <source src="<?php echo $files['ogv']; ?>" type="video/ogg">
+							<?php } ?>
+						    <p class="warning">Your browser does not support HTML5 video.</p>
+						</video>
+					</div>
+				<?php } ?>
+				
+				<!-- audio player -->
+				<?php if($files['mp3']!=null || $files['ogg']!=null){ ?>
+					<?php get_template_part( 'player', 'audio' ); ?> 
+				<?php } ?>
+				
 			</div>
 			
 			<div class="body row">
