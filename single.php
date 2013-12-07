@@ -8,7 +8,7 @@
 			<div class="clearfix">
 							
 				<!-- Converting video -->
-				<?php if($files['webm']==null && ($files['mp3']!=null && $files['ogg']!=null)){ ?>
+				<?php if($files['webm']==null && $files['mp3']==null && $files['ogg']==null){ ?>
 					<div id="converting">
 						<div class="converting_text">
 							<div class="converting_title"><?php _e('O video ainda esta convertindose', 'adt'); ?></div>
@@ -26,7 +26,7 @@
 				<?php } ?>
 				
 				<!-- video player -->
-				<?php if($files['webm']!=null){ ?>
+				<?php if($files['webm']!=null && $files['mp3']==null && $files['ogg']==null){ ?>
 					<div id="video-post-<?php the_ID(); ?>" class="video_contenedor">
 						<?php 
 							$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'video_poster' );

@@ -32,7 +32,7 @@ get_header();
 	exec("/usr/bin/ffmpeg -y -ss 00:00:00.435 -i ".$video_in." -qscale 1 -f mjpeg -vframes 1 ".$image_out);
 	//exec("/usr/bin/ffmpeg -i ".$video_in." -ab 56 -ar 44100 -b 200 -r 15 -s 320x240 -f flv ".$video_out." &");
 	//exec("/usr/bin/ffmpeg -i ".$video_in." -c:v libx264 -preset ultrafast -qp 0 ".$video_out."");
-//	exec("/usr/bin/ffmpeg -i /home/adtlantida/dev.adtlantida.tv/wp-content/uploads/2013/07/MVI_69492.mov -acodec libfaac -vcodec libx264 -vpre normal -refs 1 -coder 1 -level 31 -threads 8 -partitions parti4x4+parti8x8+partp4x4+partp8x8+partb8x8 -flags +mv4 -trellis 1 -cmp 256 -me_range 16 -sc_threshold 40 -i_qfactor 0.71 -bf 0 -g 250 /home/adtlantida/dev.adtlantida.tv/wp-content/uploads/2013/07/MVI_69492.mp4");
+//	exec("/usr/bin/ffmpeg -i /home/adtlantida/adtlantida.tv/wp-content/uploads/2013/07/MVI_69492.mov -acodec libfaac -vcodec libx264 -vpre normal -refs 1 -coder 1 -level 31 -threads 8 -partitions parti4x4+parti8x8+partp4x4+partp8x8+partb8x8 -flags +mv4 -trellis 1 -cmp 256 -me_range 16 -sc_threshold 40 -i_qfactor 0.71 -bf 0 -g 250 /home/adtlantida/adtlantida.tv/wp-content/uploads/2013/07/MVI_69492.mp4");
 	
 	
 	// insert video into post

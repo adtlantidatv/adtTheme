@@ -12,6 +12,7 @@ function adt_setup() {
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 480, 9999 ); // Unlimited height, soft crop
 	add_image_size( 'list_01_1_of_3', 390, 220, true );
+	add_image_size( 'zpan3_false', 270, 9999, false );
 	add_image_size( 'video_poster', 1170, 659, true );
 }
 add_action( 'after_setup_theme', 'adt_setup' );
