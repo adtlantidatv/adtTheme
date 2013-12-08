@@ -64,7 +64,7 @@
 				<div class="relative">
 					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
 					<div class="converting">
-						<div class="estado"><?php _e('convertindo...', 'adt'); ?></div>
+						<div class="estado"><?php _e('converting...', 'adt'); ?></div>
 						<div class="adt_loading animation_spin"></div>
 					</div>
 				</div>			
@@ -117,7 +117,7 @@
 			<a href="/editar-autor"><i class="icon-gear"></i></a>
 			<?php } ?>					
 		</h1>
-		<?php _e('Esta &eacute; a t&uacute;a p&aacute;xina, onde atopar&aacute;s os teus arquivos. Podes subir un novo v&iacute;deo no bot&oacute;n azul da dereita, que ten unha icona de nube. Tam&eacute;n podes mudar a t&uacute;a informaci&oacute;n no pequeno bot&oacute;n con forma de roda dentada que est&aacute; ao lado do teu nome.'); ?>
+		<?php _e('Here you will find your archives. You can upload a new archive by pressing the upload button (the one that has a cloud) in your right. You can also change your personal information by pressing the little circle that is close to your name', 'adt'); ?>
 	</div>
 	
 	<div class="span1">

@@ -11,11 +11,11 @@
 				<?php if($files['webm']==null && $files['mp3']==null && $files['ogg']==null){ ?>
 					<div id="converting">
 						<div class="converting_text">
-							<div class="converting_title"><?php _e('O video ainda esta convertindose', 'adt'); ?></div>
+							<div class="converting_title"><?php _e('Video is still converting...', 'adt'); ?></div>
 							<div class="converting_descrip">
-								<p><?php _e('Isto pode levarlle alguns minutos', 'adt'); ?></p>
-								<p><?php _e('Mira os teus videos, volve mais tarde ou preme en actualizar', 'adt'); ?>
-									<a href="javascript:location.reload(true);" title="<?php _e('actualiza a paxina', 'adt'); ?>">
+								<p><?php _e('It can take several minutes', 'adt'); ?></p>
+								<p><?php _e('Take a look to your videos, come back later or click the update button', 'adt'); ?>
+									<a href="javascript:location.reload(true);" title="<?php _e('update', 'adt'); ?>">
 										<i class="icon-refresh"></i>
 									</a>
 								</p>
@@ -118,19 +118,19 @@
 		<div class="row">
 			<div class="span6">
 				<section class="margin_top_100 form_02">
-					<h1><?php _e('Codigo incrustar','adt'); ?></h1>
-					<div class="descripcion"><?php _e('Copia o seguinte codigo e pegao onde queiras','adt') ?></div>
+					<h1><?php _e('Embed code','adt'); ?></h1>
+					<div class="descripcion"><?php _e('Copy the code and past it everywhere','adt') ?></div>
 					<textarea id="embed_code" onclick="this.focus();this.select()" readonly="readonly" class="mono margin_top_50">
 <iframe src="<?php echo get_bloginfo('url'); ?>/player/?id=<?php echo $post->ID; ?>" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></textarea>
 
-					<h2 class="margin_top_30"><?php _e('Opcions para incrustar','adt'); ?></h2>
+					<h2 class="margin_top_30"><?php _e('Embed options','adt'); ?></h2>
 					<div class="row">
 						<div class="span1">
-							<label for="embed_ancho"><?php _e('ancho', 'adt'); ?> (px)</label>
+							<label for="embed_ancho"><?php _e('width', 'adt'); ?> (px)</label>
 							<input id="embed_ancho" name="embed_ancho" type="text" value="640" />
 						</div>
 						<div class="span1">
-							<label for="embed_alto"><?php _e('alto', 'adt'); ?> (px)</label>
+							<label for="embed_alto"><?php _e('height', 'adt'); ?> (px)</label>
 							<input id="embed_alto" name="embed_alto" type="text" value="360" />
 						</div>
 					</div>
@@ -155,36 +155,36 @@
 			
 			<div class="span6">
 				<section class="margin_top_100 form_02">
-					<h1><?php _e('Enlace','adt'); ?></h1>
-					<div class="descripcion"><?php _e('Esta e a ruta para ver o video','adt') ?></div>
+					<h1><?php _e('Link','adt'); ?></h1>
+					<div class="descripcion"><?php _e('This is the url for watching the video','adt') ?></div>
 					<input type="text" value="<?php the_permalink(); ?>" onclick="this.focus();this.select()" readonly="readonly" class="margin_top_50">
 				</section>
 				
 				<section class="margin_top_50 form_02">
-					<h1><?php _e('Redes sociais','adt'); ?></h1>
+					<h1><?php _e('Social networks','adt'); ?></h1>
 					
 					<ul class="reset social">
 					
 						<li class="so_facebook">
-							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" title="<?php _e('Compartir en ', 'adt'); ?>Facebook">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" title="<?php _e('Share in ', 'adt'); ?>Facebook">
 								<i class="icon-facebook"></i>
 							</a>
 						</li>
 						
 						<li class="so_twitter">
-							<a href="//twitter.com/share?text=<?php _e('Botalle un ollo a', 'adt'); ?> &quot;<?php echo esc_attr(get_the_title()); ?>&quot; <?php _e('en Adtlantida.tv', 'adt'); ?>&amp;url=<?php the_permalink(); ?>&amp;hashtags=Adtlantida" target="_blank" title="<?php _e('Compartir en ', 'adt'); ?>Twitter">
+							<a href="//twitter.com/share?text=<?php _e('Take a look to', 'adt'); ?> &quot;<?php echo esc_attr(get_the_title()); ?>&quot; <?php _e('at Adtlantida.tv', 'adt'); ?>&amp;url=<?php the_permalink(); ?>&amp;hashtags=Adtlantida" target="_blank" title="<?php _e('Share in ', 'adt'); ?>Twitter">
 								<i class="icon-twitter"></i>
 							</a>
 						</li>
 						
 						<li class="so_google-plus">
-							<a href="https://plus.google.com/share?url=<?php the_permalink(); ?>" target="_blank" title="<?php _e('Compartir en ', 'adt'); ?>Google Plus">
+							<a href="https://plus.google.com/share?url=<?php the_permalink(); ?>" target="_blank" title="<?php _e('Share in ', 'adt'); ?>Google Plus">
 								<i class="icon-google-plus"></i>
 							</a>
 						</li>
 						
 						<li class="so_tumblr">
-							<a href="https://www.tumblr.com/share/video?embed=<?php the_permalink(); ?>&tags=Adtlantida" target="_blank" title="<?php _e('Compartir en ', 'adt'); ?>Tumblr">
+							<a href="https://www.tumblr.com/share/video?embed=<?php the_permalink(); ?>&tags=Adtlantida" target="_blank" title="<?php _e('Share in ', 'adt'); ?>Tumblr">
 								<i class="icon-tumblr"></i>
 							</a>
 						</li>
@@ -199,7 +199,7 @@
 			</div>
 		</div>
 		
-		<a href="#" class="close_menu_black" title="<?php _e('cerrar menu', 'adt'); ?>"></a>
+		<a href="#" class="close_menu_black" title="<?php _e('close menu', 'adt'); ?>"></a>
 	</div>
 </div>
 <?php endwhile; // end of the loop. ?>

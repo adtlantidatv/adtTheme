@@ -36,11 +36,11 @@
 				?>
 				<div class="span6">
 					<div class="margin_top_100">
-						<h1><?php _e('Panel', 'adt'); ?></h1>
+						<h1><?php _e('Dashboard', 'adt'); ?></h1>
 						<ul class="clean_ul">
-							<li><a href="<?php echo get_author_posts_url($current_user->ID); ?>"><?php _e('Os meus arquivos', 'adt'); ?></a></li>
-							<li><a href="/subir" title="<?php _e('Subir un video', 'adt'); ?>" target="_blank"><?php _e('Subir un video', 'adt'); ?></a></li>
-							<li><a href="<?php echo wp_logout_url( home_url() ); ?>" title="<?php _e('Sair da conta', 'adt'); ?>" target="_blank"><?php _e('Sair da conta', 'adt'); ?></a></li>
+							<li><a href="<?php echo get_author_posts_url($current_user->ID); ?>"><?php _e('My works', 'adt'); ?></a></li>
+							<li><a href="/subir" title="<?php _e('Upload a work', 'adt'); ?>" target="_blank"><?php _e('Upload a work', 'adt'); ?></a></li>
+							<li><a href="<?php echo wp_logout_url( home_url() ); ?>" title="<?php _e('Log out', 'adt'); ?>"><?php _e('Log out', 'adt'); ?></a></li>
 						</ul>
 					</div>
 				</div>

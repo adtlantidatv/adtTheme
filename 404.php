@@ -1,7 +1,18 @@
 <?php get_header(); ?>
+<div class="author_line row">
 
-<?php _e( 'This is somewhat embarrassing, isn&rsquo;t it?', 'twentytwelve' ); ?>
-<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'twentytwelve' ); ?></p>
+<div class="span1">
+	<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="btn_01"></a>	
+</div>
+
+<div class="span11">
+
+<h1><?php _e( 'We could not find this page', 'adt' ); ?></h1>
+<p><?php _e( 'If you are looking for something, you can use our search form', 'adt' ); ?></p>
 
 <?php get_search_form(); ?>
+</div>
+
+</div>
+
 <?php get_footer(); ?>
