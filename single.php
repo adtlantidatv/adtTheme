@@ -8,7 +8,7 @@
 			<div class="clearfix">
 							
 				<!-- Converting video -->
-				<?php if($files['webm']==null && $files['mp3']==null && $files['ogg']==null){ ?>
+				<?php if(get_post_meta( $post->ID, 'adt_is_converting', true ) == '1'){ ?>
 					<div id="converting">
 						<div class="converting_text">
 							<div class="converting_title"><?php _e('Video is still converting...', 'adt'); ?></div>

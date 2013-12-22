@@ -119,6 +119,12 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'id'   => $prefix . 'stream_url_other',
 				'type' => 'text',
 			),
+			array(
+				'name' => __('Is converting?', 'adt'),
+				'desc' => __('This is managed by the system, leave uncheck if you are uploading a video by hand', 'adt'),
+				'id'   => $prefix . 'is_converting',
+				'type' => 'checkbox',
+			),	
 		),
 	);
 

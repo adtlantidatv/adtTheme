@@ -60,7 +60,8 @@
 		
 		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
 
-			<?php if($files['webm']==null && ($files['mp3']!=null && $files['ogg']!=null)){ ?>
+			<!-- Converting ... -->
+			<?php if(get_post_meta( $post->ID, 'adt_is_converting', true ) == '1'){ ?>
 				<div class="relative">
 					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
 					<div class="converting">
@@ -69,7 +70,7 @@
 					</div>
 				</div>			
 		
-			<?php }else if($files['webm']!=null){ ?>
+			<?php }else if($files['webm']!=null || $files['mp4']!=null || $files['ogv']!=null){ ?>
 				<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
 			
 			<?php }else{ ?>
