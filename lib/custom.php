@@ -22,6 +22,23 @@ function adt_post_types_init() {
 		)
 	);
 
+	// Audioleaks
+	$labels = array(
+		'name' => __( 'Audioleaks' ),
+		'singular_name' => __( 'Audioleak' ),
+		'add_new_item' => _x( 'Add New Audioleak', 'adt' )
+	);
+	register_post_type(
+		'audioleaks',
+		array(
+			'labels' => $labels,
+			'public' => true,
+			'has_archive' => true,
+			'menu_position' => 5,
+			'supports' => array('title', 'thumbnail', 'author')
+		)
+	);
+
 	// Colaboradores Post Type
 	$labels = array(
 		'name' => __( 'Collaborators' ),
@@ -182,6 +199,12 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'desc' => '',
 				'id'   => $prefix . 'twitter_hashtag',
 				'type' => 'text',
+			),
+			array(
+				'name' => __('Chat'),
+				'desc' => '',
+				'id'   => $prefix . 'chat',
+				'type' => 'textarea',
 			),
 		),
 	);

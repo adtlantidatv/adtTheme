@@ -3,7 +3,7 @@
 <?php if ( have_posts() ){ ?>
 <?php the_post(); ?>
 
-<div class="author_line row">
+<div class="author_line margin_top_60 row">
 	
 	<div class="span2">
 		<div class="float_01">
@@ -21,13 +21,13 @@
 		</div>
 	</div>
 	
-	<div class="span9_eat_gutter remove_margin">
+	<div class="span8 remove_margin">
 		<h1>
 			<a class="url fn n" href="<?php echo get_author_posts_url( get_the_author_meta("ID")); ?>" title="<?php echo esc_attr(get_the_author()); ?>" rel="me">
 				<?php echo get_the_author(); ?>
 			</a>
 			<?php if ( current_user_can('edit_post', $post->ID) ) { ?>
-			<a href="/editar-autor"><i class="icon-gear"></i></a>
+			<a href="/editar-autor"><i class="icon-gear btn_06"></i></a>
 			<?php } ?>					
 		</h1>
 		<a href="<?php the_author_url(); ?>" title="<?php echo esc_attr(get_the_author()); ?>" class="web">
@@ -36,18 +36,14 @@
 		<?php the_author_meta( 'description' ); ?>
 	</div>
 	
-	<div class="span1">
-		<?php if ( is_user_logged_in() ) { ?>
-		<a href="/subir" class="blue btn_01" title="<?php _e('Upload a video', 'adt'); ?>"><i class="icon-cloud-upload"></i></a>
-		<?php } ?>
-	</div>
 </div>
 
-<div class="row-fluid list_01">
+<div class="row-fluid list_01 clearfix">
 	<?php
 	$args = array(
 		'post_type' 		=>	array('post', 'streams'),
-		'author'			=> get_the_author_meta( 'ID' )
+		'author'			=> get_the_author_meta( 'ID' ),
+		'paged' 			=> get_query_var( 'paged' )
 	);
 	
 	$query = new WP_Query( $args );
@@ -58,7 +54,7 @@
 	<article class="span1_of_3">
 		<?php $files = getFilesUrlByType($post->ID); ?>
 		
-		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
+		<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(get_the_title()); ?>" class="main_link">
 
 			<!-- Converting ... -->
 			<?php if(get_post_meta( $post->ID, 'adt_is_converting', true ) == '1'){ ?>
@@ -69,11 +65,15 @@
 						<div class="adt_loading animation_spin"></div>
 					</div>
 				</div>			
-		
-			<?php }else if($files['webm']!=null || $files['mp4']!=null || $files['ogv']!=null){ ?>
-				<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
-			
+					
 			<?php }else{ ?>
+				<div class="image">
+					<?php if($files['mp3'] || $files['ogg']){ ?>
+					<div class="image_audio"><?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?></div>
+					<?php }else{ ?>
+					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+					<?php } ?>
+				</div>
 			<?php } ?>
 			
 			<h1 class="margin_right_30">
@@ -82,11 +82,14 @@
 		</a>
 	</article>
 	<?php	
-	endwhile;
-	
-	wp_reset_postdata();	
-	?>
+	endwhile; ?>
+
 </div>
+<?php
+adt_paging_nav();	
+	
+wp_reset_postdata();	
+?>
 
 <?php }else{ ?>
 <div class="author_line row">

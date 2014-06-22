@@ -1,4 +1,4 @@
-<?php global $files; ?>
+<?php $files = getFilesUrlByType($post->ID); ?>
 <div id="audio-post-<?php the_ID(); ?>" class="audio_contenedor margin_top_40">
 	<audio>
 		<?php if($files['mp3']){ ?>
@@ -10,14 +10,19 @@
 	</audio>
 	<a class="btn_01 play" href="#">play!</a>
 	<div class="timer"><span class="actual">0:00</span> / <span class="total">0:00</span></div>
-	<div class="controles"><a href="#" class="mute"><?php _e('mute', 'adt'); ?></a></div>
+	<div class="controles"><a href="#" class="mute"><?php _e('mute', 'adt'); ?></a> / <a href="#" class="share"><?php _e('share', 'adt'); ?></a></div>
+	<?php the_post_thumbnail('full', array('class' => 'waveform')); ?>
 	<div class="lendo"></div>
-	<div class="soado"></div>
-	<canvas id="view" width="1170" height="215"></canvas>
+	<div class="soado"></div>	
+	<img src="<?php echo get_template_directory_uri(); ?>/img/aplayer_back.png" />
 </div>
 
 <script type="text/javascript">
-	soundManager.setup({preferFlash: false, useFlashBlock: false});
+		<?php if($files['ogg']){ ?>
+			soundManager.setup({preferFlash: false, useFlashBlock: false});
+		<?php }else{ ?>
+			soundManager.setup({url: '<?php echo get_template_directory_uri(); ?>/lib/soundmanager/swf/', preferFlash: true});
+		<?php } ?>
 	soundManager.onready(function() {
 		var thisSound = null;
 		jQuery('.audio_contenedor a.play').each(function(){
@@ -73,47 +78,14 @@
 				thisSound.toggleMute();	
 			});
 			
-			// draw waveform
-			// code by 
-			var audioContext = new webkitAudioContext();
-			
-			function drawBuffer( width, height, context, buffer ) {
-			    var data = buffer.getChannelData( 0 );
-			    var step = Math.ceil( data.length / width );
-			    var amp = height / 2;
-			    for(var i=0; i < width; i++){
-			        var min = 1.0;
-			        var max = -1.0;
-			        for (j=0; j<step; j++) {
-			            var datum = data[(i*step)+j]; 
-			            if (datum < min)
-			                min = datum;
-			            if (datum > max)
-			                max = datum;
-			        }
-			        context.fillStyle="#79e2fd";
-			        context.fillRect(i,(1+min)*amp,1,Math.max(1,(max-min)*amp));
-			    }
-			}
-			
-			function initAudio() {
-			    var audioRequest = new XMLHttpRequest();
-			    audioRequest.open("GET", sound_url, true);
-			    audioRequest.responseType = "arraybuffer";
-			    audioRequest.onload = function() {
-			        audioContext.decodeAudioData( audioRequest.response, 
-			            function(buffer) { 
-			                var canvas = document.getElementById("view");
-			                drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffer ); 
-			            } );
-			    }
-			    audioRequest.send();
-			}
-			
-			window.addEventListener('load', initAudio );
-			
 
 		});
+
+	    jQuery('a.share').click(function(){
+	    	jQuery('body').addClass('go_left_50');
+	    	jQuery('.menu_right').addClass('pushed');
+			return false;
+	    });		
 		
 	});
 

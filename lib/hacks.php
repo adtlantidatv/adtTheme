@@ -97,3 +97,47 @@ function adt_wp_mail_from( $email_address ){
 add_filter( 'wp_mail_from', 'adt_wp_mail_from' );
 
 
+/* ******************************************************* */
+/* _____ Chat ____________________________________________ */
+/* _______________________________________________________ */
+
+add_action( 'wp_enqueue_scripts', 'inputtitle_submit_scripts' );  
+add_action( 'wp_ajax_ajax-inputtitleSubmit', 'myajax_inputtitleSubmit_func' );
+add_action( 'wp_ajax_nopriv_ajax-inputtitleSubmit', 'myajax_inputtitleSubmit_func' );
+
+function inputtitle_submit_scripts() {
+
+    global $post_type;
+	if($post_type == 'streams'){
+	    wp_enqueue_script( 'inputtitle_submit', get_template_directory_uri() . '/lib/chat/save_chat.js', array( 'jquery' ), true);	
+	    wp_localize_script( 'inputtitle_submit', 'PT_Ajax', array(
+	        'ajaxurl'       => admin_url( 'admin-ajax.php' ),
+	        'nextNonce'     => wp_create_nonce( 'myajax-next-nonce' ))
+	    );
+	}
+	
+}
+ 
+function myajax_inputtitleSubmit_func() {
+	// check nonce
+	$nonce = $_POST['nextNonce']; 	
+	if ( ! wp_verify_nonce( $nonce, 'myajax-next-nonce' ) )
+		die ( 'Busted!');
+
+	update_post_meta($_POST['post'], 'adt_chat', $_POST['texto']);
+ 
+	exit;
+	
+}
+
+/* ******************************************************* */
+/* _____ Pagination search bug ___________________________ */
+/* _______________________________________________________ */
+
+function custom_posts_per_page( $query ) {
+ 
+    if ( $query->is_search() ) {
+        set_query_var('posts_per_page', 1);
+    }
+}
+add_action( 'pre_get_posts', 'custom_posts_per_page' );

@@ -13,6 +13,7 @@ function adt_scripts_styles() {
 	$wp_styles->add_data( 'twentytwelve-ie', 'conditional', 'lt IE 9' );
 	
 	wp_enqueue_script("jquery");
+	wp_enqueue_script("jquery-ui-tabs");
 	/*
 	 * Adds JavaScript to pages with the comment form to support
 	 * sites with threaded comments (when in use).

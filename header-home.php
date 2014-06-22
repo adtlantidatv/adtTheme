@@ -34,7 +34,8 @@
 						<ul class="clean_ul">
 							<li><a href="<?php echo get_author_posts_url($current_user->ID); ?>"><?php _e('My works', 'adt'); ?></a></li>
 							<li><a href="/subir" title="<?php _e('Upload a work', 'adt'); ?>"><?php _e('Upload a work', 'adt'); ?></a></li>
-							<li><a href="<?php echo wp_logout_url( home_url() ); ?>" title="<?php _e('Log out', 'adt'); ?>" target="_blank"><?php _e('Log out', 'adt'); ?></a></li>
+							<li><a href="/stream" title="<?php _e('Add a stream', 'adt'); ?>"><?php _e('Add a stream', 'adt'); ?></a></li>
+							<li><a href="<?php echo wp_logout_url( home_url() ); ?>" title="<?php _e('Log out', 'adt'); ?>"><?php _e('Log out', 'adt'); ?></a></li>
 						</ul>
 					</div>
 				</div>
