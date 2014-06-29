@@ -41,3 +41,27 @@ jQuery(document).ready(function() {
 	
 	jQuery('.streaming_controls').tabs();    
 });
+
+window.ify=function(){var entities={'"':'"','&':'&','<':'<','>':'>'};return{"link":function(t){if (typeof t!='undefined') return t.replace(/[a-z]+:\/\/[a-z0-9-_]+\.[a-z0-9-_:~%&\?\/.=]+[^:\.,\)\s*$]/ig,function(m){ if (typeof m!='undefined') return'<a href="'+m+'">'+((m.length>25)?m.substr(0,24)+'...':m)+'</a>';});},"at":function(t){ if (typeof t!='undefined') return t.replace(/(^|[^\w]+)\@([a-zA-Z0-9_]{1,15})/g,function(m,m1,m2){return m1+'@<a href="http://twitter.com/'+m2+'">'+m2+'</a>';});},"hash":function(t){ if (typeof t!='undefined')return t.replace(/(^|[^\w'"]+)\#([a-zA-Z0-9_]+)/g,function(m,m1,m2){return m1+'#<a href="http://search.twitter.com/search?q=%23'+m2+'">'+m2+'</a>';});},"clean":function(tweet){return this.hash(this.at(this.link(tweet)));}};}();
+
+function formateaFechaTwitter(time){
+	time = time.replace(/ \+0000/g, ' UTC+0000');
+
+	var date = new Date(time),
+		diff = (((new Date()).getTime() - date.getTime()) / 1000),
+		day_diff = Math.floor(diff / 86400);
+
+	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+		return;
+
+	return day_diff == 0 && (
+			diff < 60 && "Agora" ||
+			diff < 120 && "Hai 1 minuto" ||
+			diff < 3600 && "Hai " + Math.floor( diff / 60 ) + " minutos" ||
+			diff < 7200 && "Hai 1 hora" ||
+			diff < 86400 && "Hai " + Math.floor( diff / 3600 ) + " horas") ||
+		day_diff == 1 && "Onte" ||
+		day_diff < 7 && "Hai " + day_diff + " d&iacute;as" ||
+		day_diff < 31 && "Hai " + Math.ceil( day_diff / 7 ) + " semanas";
+}
+

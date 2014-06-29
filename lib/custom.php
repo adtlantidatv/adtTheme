@@ -39,6 +39,23 @@ function adt_post_types_init() {
 		)
 	);
 
+	// Multistreamings
+	$labels = array(
+		'name' => __( 'Multistreamings' ),
+		'singular_name' => __( 'Multistreaming' ),
+		'add_new_item' => _x( 'Add New Multistreaming', 'adt' )
+	);
+	register_post_type(
+		'multistreamings',
+		array(
+			'labels' => $labels,
+			'public' => true,
+			'has_archive' => true,
+			'menu_position' => 5,
+			'supports' => array('title', 'editor', 'thumbnail')
+		)
+	);
+
 	// Colaboradores Post Type
 	$labels = array(
 		'name' => __( 'Collaborators' ),
@@ -142,6 +159,29 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'id'   => $prefix . 'is_converting',
 				'type' => 'checkbox',
 			),	
+		),
+	);
+
+	$meta_boxes[] = array(
+		'id'         => 'Multistreaming metabox',
+		'title'      => __('Multistreaming configuration'),
+		'pages'      => array( 'multistreamings' ), // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_names' => true, // Show field names on the left
+		'fields'     => array(
+			array(
+				'name' => 'Streaming ids',
+				'desc' => '',
+				'id'   => $prefix . 'streaming_ids',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Twitter',
+				'desc' => '',
+				'id'   => $prefix . 'twitter_hashtag',
+				'type' => 'text',
+			),
 		),
 	);
 

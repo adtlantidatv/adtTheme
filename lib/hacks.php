@@ -131,6 +131,77 @@ function myajax_inputtitleSubmit_func() {
 }
 
 /* ******************************************************* */
+/* _____ Multistreaming twitter __________________________ */
+/* _______________________________________________________ */
+
+add_action( 'wp_enqueue_scripts', 'multistreaming_submit_scripts' );  
+add_action( 'wp_ajax_ajax-multistreaming', 'myajax_multistreaming_func' );
+add_action( 'wp_ajax_nopriv_ajax-multistreaming', 'myajax_multistreaming_func' );
+
+function multistreaming_submit_scripts() {
+
+    global $post_type;
+	if($post_type == 'multistreamings'){
+	    wp_enqueue_script( 'inputtitle_submit', get_template_directory_uri() . '/js/multistreaming.js', array( 'jquery', 'adt_custom_script' ), true);	
+	    wp_localize_script( 'inputtitle_submit', 'PT_Ajax', array(
+	        'ajaxurl'       => admin_url( 'admin-ajax.php' ),
+	        'nextNonce'     => wp_create_nonce( 'myajax-next-nonce' ))
+	    );
+	}
+	
+}
+ 
+function myajax_multistreaming_func() {
+	// check nonce
+	$nonce = $_POST['nextNonce']; 	
+	if ( ! wp_verify_nonce( $nonce, 'myajax-next-nonce' ) )
+		die ( 'Busted!');
+		
+	$post_to_add_id = url_to_postid( $_POST['streaming_url'] );
+	$postid = $_POST['post'];
+	$ids = get_post_meta( $postid, 'adt_streaming_ids', true );
+	
+	$ids_array = [];
+	if($ids != ''){
+		$ids_array = explode(',', $ids);	
+		
+		if(!in_array($post_to_add_id, $ids_array)){
+			array_push($ids_array, $post_to_add_id);
+			$ids = implode(', ', $ids_array);
+			update_post_meta($postid, 'adt_streaming_ids', $post_to_add_id);
+			
+			// generate the response
+			$response = json_encode( array( 'streamingids' => $post_to_add_id ) );
+ 
+			// response output
+			header( "Content-Type: application/json" );
+			echo $response;
+		}else{
+			// generate the response
+			$response = json_encode( array( 'streamingids' => 'none' ) );
+ 
+			// response output
+			header( "Content-Type: application/json" );
+			echo $response;
+		}
+		
+	}else{
+
+		$ids = $post_to_add_id;
+		update_post_meta($postid, 'adt_streaming_ids', $post_to_add_id);
+
+		// generate the response
+		$response = json_encode( array( 'streamingids' => $post_to_add_id ) );
+ 
+		// response output
+		header( "Content-Type: application/json" );
+		echo $response;
+	}
+ 
+	exit;
+}
+
+/* ******************************************************* */
 /* _____ Pagination search bug ___________________________ */
 /* _______________________________________________________ */
 

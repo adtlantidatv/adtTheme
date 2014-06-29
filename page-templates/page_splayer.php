@@ -46,7 +46,6 @@ if(isset($_GET["id"]) && $_GET["id"] != ""){
 	while ( $query->have_posts() ) : $query->the_post();
 		?>
 				<!-- Comprobando si hai streamings -->
-				<?php if(!$admin){ ?>
 					<div id="converting" class="embed">
 					<div class="converting_warper">
 						<div class="converting_text">
@@ -62,7 +61,6 @@ if(isset($_GET["id"]) && $_GET["id"] != ""){
 						</div>
 					</div>
 					</div>
-				<?php } ?>
 			
         	        
 				<div id="videos-container"></div>

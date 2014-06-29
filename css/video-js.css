@@ -3,7 +3,7 @@ REQUIRED STYLES (be careful overriding)
 ================================================================================ */
 /* When loading the player, the video tag is replaced with a DIV,
    that will hold the video tag or object tag for other playback methods.
-   The div contains the video playback element (Flash or HTML5) and controls, and sets the width and height of the video.
+   The div contains the video playback element (HTML5) and controls, and sets the width and height of the video.
 
    ** If you want to add some kind of border/padding (e.g. a frame), or special positioning, use another containing element.
    Otherwise you risk messing up control positioning and full window mode. **

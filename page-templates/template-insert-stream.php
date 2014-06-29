@@ -7,6 +7,9 @@ get_header();
 ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
+	
+	<?php if(current_user_can('edit_private_pages')){ ?>
+
 
 	<div class="row engade_stream margin_top_60">
 		<div class="span4">		
@@ -31,6 +34,20 @@ get_header();
 	<div class="row">
 		<?php the_content(); ?>
 	</div>
+	<?php }else{ ?>
+	<div class="row engade_stream margin_top_60">
+		<div class="span1">		
+			<a href="#" id="adt_menu" title="Adtlantida.tv menu" class="btn_01 right"></a>
+		</div>
+		
+		<div class="span8">
+			<h1>
+				<?php _e('Sentímolo, coa túa conta non podes facer streamings.', 'adt'); ?>
+			</h1>
+		</div>
+	</div>
+	
+	<?php } ?>
 
 <?php endwhile; // end of the loop. ?>
 
