@@ -85,4 +85,23 @@ function adt_paging_nav() {
 }
 endif;
 
+function adt_get_avatar($user_id){
+	
+	if(get_user_meta($user_id, 'avatar', true) != ''){
+		$image_url = wp_get_attachment_image_src( get_user_meta($user_id, 'avatar', true), 'avatar' )[0];
+	}else{
+		$image_url = '';
+	}
+	return $image_url;	
+}
+
+function adt_the_avatar($user_id){
+	
+	if(get_user_meta($user_id, 'avatar', true) != ''){
+		$image = wp_get_attachment_image(get_user_meta($user_id, 'avatar', true));
+	}else{
+		$image = '';
+	}
+	return $image;	
+}
 ?>

@@ -4,7 +4,12 @@
 	> 2013, Muaz Khan - wwww.MuazKhan.com
 	> MIT License     - www.WebRTC-Experiment.com/licence
 	> Documentation   - github.com/muaz-khan/WebRTC-Experiment/tree/master/video-broadcasting
-	-->
+	
+  <body>
+    <video id="videoInput" autoplay></video>
+    <video id="videoOutput" autoplay></video>
+  </body>
+
 
     <head>
         <title>Adtlantida.tv tests</title>
@@ -27,9 +32,18 @@
         <script src="http://147.83.72.228/tests/video_broadcasting_node2/socket.io.js"> </script>
         <script src="https://www.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>
         <script src="https://www.webrtc-experiment.com/webrtc-broadcasting/broadcast.js"> </script>
+        <script src="adapter.js"></script>
+        <script src="http://147.83.72.228/kws-media-api/dist/kws-media-api.js"></script>
+        <script src="index.js"></script>
+
     </head>
 
     <body>
+
+  <!-- 	 <video id="videoInput" autoplay></video>
+         <video id="videoOutput" autoplay></video>-->
+
+
     	<div class="container centrar">
     		<a href="#" id="adt_menu" title="Adtlantida.tv menu" class="btn_01"></a>
         <article>

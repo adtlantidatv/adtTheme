@@ -20,6 +20,8 @@
 	<!-- scripts used for broadcasting -->
 	<!-- <script type="text/javascript" src="https://www.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script> -->
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/RTCPeerConnection-v1.5.js"> </script>
+        <script type="text/javascript" src="http://147.83.72.228/kws-media-api/dist/kws-media-api.js"> </script>
+
 	<script type="text/javascript" src="https://www.webrtc-experiment.com/webrtc-broadcasting/broadcast.js"> </script>
 	
 </head>
