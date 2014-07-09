@@ -56,10 +56,14 @@ get_header();
 					
 			<?php }else{ ?>
 				<div class="image">
-					<?php if($files['mp3'] || $files['ogg']){ ?>
-					<div class="image_audio"><?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?></div>
+					<?php if(has_post_thumbnail()){ ?>
+						<?php if($files['mp3'] || $files['ogg']){ ?>
+						<div class="image_audio"><?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?></div>
+						<?php }else{ ?>
+						<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+						<?php } ?>
 					<?php }else{ ?>
-					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+						<?php echo wp_get_attachment_image( 615, 'list_01_1_of_3' ); ?>
 					<?php } ?>
 				</div>
 			<?php } ?>

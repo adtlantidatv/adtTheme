@@ -37,7 +37,7 @@
 <div class="row-fluid list_01 clearfix">
 	<?php
 	$args = array(
-		'post_type' 		=>	array('post', 'streams'),
+		'post_type' 		=>	array('post', 'streams', 'multistreamings'),
 		'author'			=> get_the_author_meta( 'ID' ),
 		'paged' 			=> get_query_var( 'paged' )
 	);
@@ -64,10 +64,14 @@
 					
 			<?php }else{ ?>
 				<div class="image">
-					<?php if($files['mp3'] || $files['ogg']){ ?>
-					<div class="image_audio"><?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?></div>
+					<?php if(has_post_thumbnail()){ ?>
+						<?php if($files['mp3'] || $files['ogg']){ ?>
+						<div class="image_audio"><?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?></div>
+						<?php }else{ ?>
+						<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+						<?php } ?>
 					<?php }else{ ?>
-					<?php echo the_post_thumbnail( 'list_01_1_of_3' ); ?>
+						<?php echo wp_get_attachment_image( 615, 'list_01_1_of_3' ); ?>
 					<?php } ?>
 				</div>
 			<?php } ?>

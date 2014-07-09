@@ -19,7 +19,7 @@ get_header();
 			</a>
 		</div>
 		
-		<div class="span8">
+		<div class="span6">
 			<h1>
 				<?php the_title(); ?>
 			</h1>
@@ -27,6 +27,10 @@ get_header();
 				<?php echo get_post_meta($post->ID, 'adt_excerpt', true); ?>
 			</div>
 		</div>
+
+				<div class="span1 text_right">
+					<a href="<?php echo esc_url( get_author_posts_url( $log_user_id ) ); ?>" class="btn_delete"><</a>
+				</div>
 	</div>
 	
 	<div class="row">
