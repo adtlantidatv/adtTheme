@@ -5,7 +5,7 @@
 
 <div class="author_line margin_top_60 row">
 	
-	<div class="span2">
+	<div class="span2 clearfix">
 		<div class="float_01">
 			<a href="#" id="adt_menu" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>" class="btn_01"></a>
 		</div>
