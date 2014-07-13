@@ -38,8 +38,9 @@
 			
 			<div class="body row">
 			
-				<div class="span1">
-					<ul class="main_menu reset">
+				<div class="span8">
+					
+					<ul class="main_menu reset clearfix">
 						<li>
 							<a href="#" id="adt_menu" class="btn_01" title="<?php _e('Adtlantida.tv menu', 'adt'); ?>"></a>
 						</li>
@@ -50,40 +51,41 @@
 							</a>
 						</li>
 						
-						<li>
-							<time><?php the_time('d.m.Y'); ?></time>
+						<li class="titulo">
+							<h1>
+								<?php the_title(); ?>
+								<?php if ( current_user_can('edit_post', $post->ID) ) {
+			                        $edit_page = (int) wpuf_get_option( 'edit_page_id', 'adtp_others' );
+			                        $url = get_permalink( $edit_page );
+			                        ?>
+									<a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>" title="<?php _e('Edit post', 'adt'); ?>"><i class="icon-gear btn_06"></i></a>
+								<?php } ?>					
+		
+							</h1>
 						</li>
 						
 					</ul>
-				</div>
 				
-				<div class="span10">
-					<h1>
-						<?php the_title(); ?>
-						<?php if ( current_user_can('edit_post', $post->ID) ) {
-	                        $edit_page = (int) wpuf_get_option( 'edit_page_id', 'adtp_others' );
-	                        $url = get_permalink( $edit_page );
-	                        ?>
-							<a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>" title="<?php _e('Edit post', 'adt'); ?>"><i class="icon-gear btn_06"></i></a>
-						<?php } ?>					
-
-					</h1>
-					<div class="width670 text">
+					<div class="text">
+							<time><?php the_time('d.m.Y'); ?></time>
 						<?php the_content(); ?>
 					</div>
 				</div>
 				
-				<div class="span1">
-					<!--
-					<ul class="reset actions">
-						<li><i class="icon-heart"></i></li>
-						<li><i class="icon-comment"></i></li>
-					</ul>
-					-->
+				<div class="span4">
+					<section class="chat">
+						<ul class="menu">
+							<li><a href="#tabs_messages_1"><?php _e('comentarios', 'adt'); ?></a></li>
+						</ul>
+
+						<div class="tabs_container" id="chat_container_<?php echo $post->ID; ?>">
+							<div id="tabs_messages_1" class="chat_container">
+								<?php comments_template( '', true ); ?>
+							</div>
+						</div>
+					</section>
 				</div>
 			</div>
-			
-			<?php comments_template( '', true ); ?>
 		</article>
 	</div>
 </div>

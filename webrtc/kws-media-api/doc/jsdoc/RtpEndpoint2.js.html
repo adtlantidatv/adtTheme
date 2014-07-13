@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: test/RtpEndpoint2.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: test/RtpEndpoint2.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+ * (C) Copyright 2014 Kurento (http://kurento.org/)
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser General Public License
+ * (LGPL) version 2.1 which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-2.1.html
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ */
+
+/**
+ * {@link RtpEndpoint2} test suite.
+ * 
+ * &lt;p>
+ * Methods tested:
+ * &lt;ul>
+ * &lt;li>{@link HttpEndpoint#getUrl()}
+ * &lt;/ul>
+ * &lt;p>
+ * Events tested:
+ * &lt;ul>
+ * &lt;li>{@link HttpEndpoint#addMediaSessionStartListener(MediaEventListener)}
+ * &lt;li>
+ * {@link HttpEndpoint#addMediaSessionTerminatedListener(MediaEventListener)}
+ * &lt;/ul>
+ * 
+ * 
+ * @author Jesús Leganés Combarro "piranna" (piranna@gmail.com)
+ * @since 4.2.4
+ * 
+ */
+
+if(typeof QUnit == 'undefined')
+{
+  QUnit = require('qunit-cli');
+
+  wock = require('wock');
+
+  kwsMediaApi = require('..');
+
+  require('./_common');
+  require('./_proxy');
+};
+
+
+QUnit.module('RtpEndpoint2', lifecycle);
+
+QUnit.asyncTest('CampusParty simulated pipeline', function()
+{
+  var self = this;
+
+  QUnit.expect(2);
+
+  self.pipeline.create('RtpEndpoint', function(error, rtpEndpoint)
+  {
+    if(error) return onerror(error);
+
+    var offer = "v=0\r\n"
+              + "o=- 12345 12345 IN IP4 192.168.1.18\r\n"
+              + "s=-\r\n"
+              + "c=IN IP4 192.168.1.18\r\n"
+              + "t=0 0\r\n"
+              + "m=video 45936 RTP/AVP 96\r\n"
+              + "a=rtpmap:96 H263-1998/90000\r\n"
+              + "a=sendrecv\r\n"
+              + "b=AS:3000\r\n";
+
+    rtpEndpoint.processOffer(offer, function(error)
+    {
+      if(error) return onerror(error);
+
+      rtpEndpoint.getMediaSrcs('VIDEO', function(error, mediaSources)
+      {
+        if(error) return onerror(error);
+
+        QUnit.notEqual(mediaSources, [], 'MediaSources: '+mediaSources);
+
+        var mediaSource = mediaSources[0];
+
+        rtpEndpoint.getMediaSinks('VIDEO', function(error, mediaSinks)
+        {
+          if(error) return onerror(error);
+
+          QUnit.notEqual(mediaSinks, [], 'MediaSinks: '+mediaSinks);
+
+          var mediaSink = mediaSinks[0];
+
+          mediaSource.connect(mediaSink, function(error)
+          {
+            if(error) return onerror(error);
+
+            self.pipeline.create('HttpGetEndpoint',
+            function(error, httpGetEndpoint)
+            {
+              if(error) return onerror(error);
+
+              rtpEndpoint.connect(httpGetEndpoint, 'VIDEO', function(error)
+              {
+                if(error) return onerror(error);
+
+                QUnit.start();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+QUnit.asyncTest('Source sinks', function()
+{
+  QUnit.expect(4);
+
+  this.pipeline.create('RtpEndpoint', function(error, rtpEndpoint)
+  {
+    if(error) return onerror(error);
+
+    rtpEndpoint.getMediaSrcs('VIDEO', function(error, mediaSources)
+    {
+      if(error) return onerror(error);
+
+      QUnit.notEqual(mediaSources, [], 'MediaSources video: '+mediaSources);
+
+      rtpEndpoint.getMediaSinks('VIDEO', function(error, mediaSinks)
+      {
+        if(error) return onerror(error);
+
+        QUnit.notEqual(mediaSinks, [], 'MediaSinks video: '+mediaSinks);
+
+        rtpEndpoint.getMediaSrcs('AUDIO', function(error, mediaSources)
+        {
+          if(error) return onerror(error);
+
+          QUnit.notEqual(mediaSources, [], 'MediaSources audio: '+mediaSources);
+
+          rtpEndpoint.getMediaSinks('AUDIO', function(error, mediaSinks)
+          {
+            if(error) return onerror(error);
+
+            QUnit.notEqual(mediaSinks, [], 'MediaSinks audio: '+mediaSinks);
+
+            rtpEndpoint.release(function(error)
+            {
+              if(error) return onerror(error);
+
+              QUnit.start();
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+QUnit.asyncTest('Connect', function()
+{
+  var self = this;
+
+  QUnit.expect(0);
+
+  self.pipeline.create('PlayerEndpoint', {uri: URL_SMALL}, function(error, player)
+  {
+    if(error) return onerror(error);
+
+    self.pipeline.create('HttpGetEndpoint', function(error, httpGet)
+    {
+      if(error) return onerror(error);
+
+      player.connect(httpGet, function(error)
+      {
+        if(error) return onerror(error);
+
+        player.play(function(error)
+        {
+          if(error) return onerror(error);
+
+          httpGet.release(function(error)
+          {
+            if(error) return onerror(error);
+
+            player.release(function(error)
+            {
+              if(error) return onerror(error);
+
+              QUnit.start();
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+QUnit.asyncTest('Connect by type', function()
+{
+  var self = this;
+
+  QUnit.expect(0);
+
+  self.pipeline.create('PlayerEndpoint', {uri: URL_SMALL}, function(error, player)
+  {
+    if(error) return onerror(error);
+
+    self.pipeline.create('HttpGetEndpoint', function(error, httpGet)
+    {
+      if(error) return onerror(error);
+
+      player.connect(httpGet, 'AUDIO', function(error)
+      {
+        if(error) return onerror(error);
+
+        player.connect(httpGet, 'VIDEO', function(error)
+        {
+          if(error) return onerror(error);
+
+          player.play(function(error)
+          {
+            if(error) return onerror(error);
+
+            httpGet.release(function(error)
+            {
+              if(error) return onerror(error);
+
+              player.release(function(error)
+              {
+                if(error) return onerror(error);
+
+                QUnit.start();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-KwsMedia.html">KwsMedia</a></li><li><a href="complexTypes_.html">KwsMedia/complexTypes</a></li><li><a href="module-kwsMediaApi.html">kwsMediaApi</a></li><li><a href="complexTypes__.html">kwsMediaApi/complexTypes</a></li><li><a href="core.html">kwsMediaApi/core</a></li><li><a href="endpoints.html">kwsMediaApi/endpoints</a></li><li><a href="filters.html">kwsMediaApi/filters</a></li><li><a href="hubs.html">kwsMediaApi/hubs</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li><li><a href="external-Number.html">Number</a></li><li><a href="external-String.html">String</a></li></ul><h3>Classes</h3><ul><li><a href="core-Endpoint.html">Endpoint</a></li><li><a href="core-Filter.html">Filter</a></li><li><a href="core-Hub.html">Hub</a></li><li><a href="core-HubPort.html">HubPort</a></li><li><a href="core-MediaElement.html">MediaElement</a></li><li><a href="core-MediaObject.html">MediaObject</a></li><li><a href="core-MediaPad.html">MediaPad</a></li><li><a href="core-MediaPipeline.html">MediaPipeline</a></li><li><a href="core-MediaSink.html">MediaSink</a></li><li><a href="core-MediaSource.html">MediaSource</a></li><li><a href="endpoints-HttpEndpoint.html">HttpEndpoint</a></li><li><a href="endpoints-HttpGetEndpoint.html">HttpGetEndpoint</a></li><li><a href="endpoints-HttpPostEndpoint.html">HttpPostEndpoint</a></li><li><a href="endpoints-PlayerEndpoint.html">PlayerEndpoint</a></li><li><a href="endpoints-RecorderEndpoint.html">RecorderEndpoint</a></li><li><a href="endpoints-RtpEndpoint.html">RtpEndpoint</a></li><li><a href="endpoints-SdpEndpoint.html">SdpEndpoint</a></li><li><a href="endpoints-SessionEndpoint.html">SessionEndpoint</a></li><li><a href="endpoints-UriEndpoint.html">UriEndpoint</a></li><li><a href="endpoints-WebRtcEndpoint.html">WebRtcEndpoint</a></li><li><a href="filters-ChromaFilter.html">ChromaFilter</a></li><li><a href="filters-CrowdDetectorFilter.html">CrowdDetectorFilter</a></li><li><a href="filters-FaceOverlayFilter.html">FaceOverlayFilter</a></li><li><a href="filters-GStreamerFilter.html">GStreamerFilter</a></li><li><a href="filters-JackVaderFilter.html">JackVaderFilter</a></li><li><a href="filters-PlateDetectorFilter.html">PlateDetectorFilter</a></li><li><a href="filters-PointerDetectorAdvFilter.html">PointerDetectorAdvFilter</a></li><li><a href="filters-PointerDetectorFilter.html">PointerDetectorFilter</a></li><li><a href="filters-ZBarFilter.html">ZBarFilter</a></li><li><a href="hubs-Composite.html">Composite</a></li><li><a href="hubs-Dispatcher.html">Dispatcher</a></li><li><a href="hubs-DispatcherOneToMany.html">DispatcherOneToMany</a></li><li><a href="module-KwsMedia-KwsMedia.html">KwsMedia</a></li></ul><h3>Global</h3><ul><li><a href="global.html#promiseCallback">promiseCallback</a></li><li><a href="global.html#QUnit">QUnit</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Jul 11 2014 12:47:55 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

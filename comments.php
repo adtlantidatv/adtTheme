@@ -20,7 +20,7 @@
 if ( post_password_required() )
 	return;
 ?>
-
+<div class="messages_container comentarios">
 <section id="comments">
 
 	<?php // You can start editing here -- including this comment! ?>
@@ -47,28 +47,20 @@ if ( post_password_required() )
 
 	<?php endif; // have_comments() ?>
 
-	<?php if ( is_user_logged_in() ) { ?> 	
-		<section class="row">
-			<?php $log_user_id = get_current_user_id(); ?>
 
-			<div class="span1">
-				<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author" class="author_link" style="background-image:url(<?php echo adt_get_avatar(get_the_author_meta( 'ID' )); ?>)">
-					<?php echo adt_the_avatar( get_the_author_meta( 'ID' ) ); ?>
-				</a>
-			</div>
+</section><!-- #comments .comments-area -->
+</div>
+	<?php if ( is_user_logged_in() ) { ?> 	
+			<?php $log_user_id = get_current_user_id(); ?>
 			
-			<div class="span7 form_01">
+			<div class="form_01 form_comentarios">
 	
 				<?php comment_form(array(
 					'logged_in_as' => '', 
 					'title_reply' => '', 
 					'comment_notes_after' => '',
-					'comment_field' => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>'
+					'comment_field' => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="1" aria-required="true"></textarea></p>'
 					)); 
 				?>
 			</div>
-		
-		</section>
 	<?php } ?>
-
-</section><!-- #comments .comments-area -->

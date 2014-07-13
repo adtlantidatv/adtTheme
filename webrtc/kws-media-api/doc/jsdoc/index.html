@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Index</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Index</h1>
+    
+    
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><p><a href="http://kurento.org"><img src="https://secure.gravatar.com/avatar/21a2a12c56b2a91c8918d5779f1778bf?s=120" alt=""></a></p>
+<p>Copyright © 2014 Kurento. Licensed under <a href="http://www.gnu.org/licenses/lgpl-2.1.html">LGPL License</a>.</p>
+<h1>KWS Media API for Node.js and browsers</h1>
+<p>Media API for Kurento Web SDK</p>
+<p>The KWS Media API project contains the implementation of the Kurento client
+side Media API for web applications and Node.js.</p>
+<p>The source code of this project can be cloned from the <a href="https://github.com/kurento/kws-media-api">GitHub repository</a>.</p>
+<h2>Installation instructions</h2>
+<p>These instructions are intended for code contributors or people willing to
+compile the browser version themselves. If you are a browser-only developer,
+it's better that you have a look at the <a href="https://github.com/KurentoReleases/kws-media-api">KWS Media API for Bower</a> instructions.</p>
+<p>This library is currently not able to communicate directly with the Kurento
+Media Server, so it requires the use of a <a href="https://github.com/Kurento/kmf-media-connector">Kurento Media Connector</a> instance.
+You can download the latest release from
+<a href="http://builds.kurento.org/release/stable//kmf-media-connector.zip">http://builds.kurento.org/release/stable//kmf-media-connector.zip</a>. When you
+decompress it you'll find a README file with installation instructions.</p>
+<h3>Node.js</h3>
+<p>Be sure to have installed the Node.js tools in your system. It's heavily
+encouraged to use the latest Node.js and NPM versions from the
+<a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint-elementary-os">Node.js project PPA</a> instead of the packages available on the oficial Ubuntu
+repositories, since due to the fast-moving Node.js community and environment
+these last ones get easily outdated and can lead to incompatibility errors:</p>
+<pre><code class="lang-bash">sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+
+sudo apt-get install nodejs nodejs-legacy</code></pre>
+<p>To install the library, it's recomended to do that from the <a href="https://www.npmjs.org/package/kws-media-api">NPM repository</a> :</p>
+<pre><code class="lang-bash">npm install kws-media-api</code></pre>
+<p>Alternatively, or if you want to modify the KWS Media API code or generate
+yourself the browser version of the library, you can download the development
+code files using git and install manually its dependencies:</p>
+<pre><code class="lang-bash">git clone https://github.com/Kurento/kws-media-api.git
+cd kws-media-api
+npm install</code></pre>
+<h3>Browser</h3>
+<p>To build the browser version of the library, after downloading the development
+code files, you'll only need to exec the <a href="http://gruntjs.com/">grunt</a> task runner from the root of
+the project and they will be generated on the <code>dist</code> folder. Alternatively,
+if you don't have it globally installed, you can run a local copy by executing</p>
+<pre><code class="lang-bash">node_modules/.bin/grunt</code></pre>
+<h2>How to test</h2>
+<p>Tests are autonomous and based on <a href="http://qunitjs.com">QUnit</a> testing framework. Their only
+requirement is to exec previously <code>npm install</code> to have installed all the
+dev dependencies.</p>
+<h3>Browser</h3>
+<p>After building the web browser version of the library, just open the file
+<code>test/index.html</code> with any browser, and the tests will launch automatically.
+In case of the browser raise some security policy errors, you can host the tests
+code by running any static web server at the source code root folder, for
+example by launching the command</p>
+<pre><code class="lang-bash">python -m SimpleHTTPServer 8000</code></pre>
+<p>You can be able to configure to what WebSocket endpoint you want to connect on
+the dropdown list at the top of the tests page.</p>
+<h3>Node.js</h3>
+<p>To exec test in Node.js, you only need to exec <code>npm test</code>, that will launch
+all the tests automatically using <a href="https://github.com/devongovett/qunit-cli">QUnit-cli</a>.</p>
+<p>At this moment, the default WebSocket endpoint can not be changed due to limits
+of the current implementation of NPM. If you need to use a different WebSocket
+endpoint from the default one, you can exec the underlying test command and
+append a <em>ws_uri</em> parameter pointing the the alternative WebSocket endpoint:</p>
+<pre><code class="lang-bash">node_modules/.bin/qunit-cli -c KwsMedia:. -c wock:node_modules/wock -c test/_common.js -c test/_proxy.js test/*.js --ws_uri=ws://localhost:8080</code></pre>
+<h2>How to create a basic pipeline</h2>
+<p>For tutorial purposes, we are going to create a basic pipeline that play a video
+file from its URL and stream it over HTTP. You can also download and check this
+<a href="https://github.com/Kurento/kws-media-api/tree/develop/example/PlayerEndpoint-HttpGetEndpoint">example full source code</a> or run it directly from <a href="http://jsfiddle.net/gh/get/library/pure/kurento/kws-media-api/contents/example/PlayerEndpoint-HttpGetEndpoint">JsFiddle</a> :</p>
+<ol>
+<li><p>Create an instance of the KwsMedia class that will manage the connection with
+the Kurento Media Server, so you'll need to provide the URI of its WebSocket
+endpoint. Alternatively, instead of using a constructor, you can also provide
+success and error callbacks:</p>
+<pre><code class="lang-Javascript">var kwsMedia = kwsMediaApi.KwsMedia(ws_uri);
+
+kwsMedia.then(function(kwsMedia)
+{
+  // Connection success
+  …
+},
+function(error)
+{
+  // Connection error
+  …
+});</code></pre>
+<pre><code class="lang-Javascript">kwsMediaApi.KwsMedia(ws_uri, function(kwsMedia)
+{
+  // Connection success
+  …
+},
+function(error)
+{
+  // Connection error
+  …
+});</code></pre>
+</li>
+<li><p>Create a pipeline. This will host and connect the diferent elements. In case
+of error, it will be notified on the <code>error</code> parameter of the callback,
+otherwise this will be null as it's common on Node.js style APIs:</p>
+<pre><code class="lang-Javascript">kwsMedia.create('MediaPipeline', function(error, pipeline)
+{
+  …
+});</code></pre>
+</li>
+<li><p>Create the elements. The player need an object with the URL of the video, and
+we'll also subscribe to the 'EndOfStream' event of the HTTP stream:</p>
+<pre><code class="lang-Javascript">pipeline.create('PlayerEndpoint',
+{uri: &quot;https://ci.kurento.com/video/small.webm&quot;},
+function(error, player)
+{
+  …
+});
+
+pipeline.create('HttpGetEndpoint', function(error, httpGet)
+{
+  httpGet.on('EndOfStream', function(event)
+  {
+    …
+  });
+
+  …
+});</code></pre>
+</li>
+<li><p>Connect the elements, so the media stream can flow between them:</p>
+<pre><code class="lang-Javascript">player.connect(httpGet, function(error, pipeline)
+{
+  …
+});</code></pre>
+</li>
+<li><p>Get the URL where the media stream will be available:</p>
+<pre><code class="lang-Javascript">httpGet.getUrl(function(error, url)
+{
+  …
+});</code></pre>
+</li>
+<li><p>Start the reproduction of the media:</p>
+<pre><code class="lang-Javascript">player.play(function(error)
+{
+  …
+});</code></pre>
+</li>
+</ol>
+<h1>Kurento</h1>
+<h2>What is Kurento</h2>
+<p>Kurento provides an open platform for video processing and streaming based on
+standards.</p>
+<p>This platform has several APIs and components which provide solutions to the
+requirements of multimedia content application developers. These include:</p>
+<ul>
+<li>Kurento Media Server (KMS). A full featured media server providing the
+capability to create and manage dynamic multimedia pipelines.</li>
+<li>Kurento Media Framework (KMF). A Java server-side API providing the required
+abstractions for creating applications that manage multimedia content, calls
+and conferences involving audio, video and data information.</li>
+<li>Kurento Web SDK (KWS). A client-side HTML5 and Javascript SDK for accessing
+KMF capabilities</li>
+<li>Kurento Android SDK (KAS). A Java and native SDK allowing easy integration of
+KMF into any kind of Android application.</li>
+</ul>
+<h2>Downloads</h2>
+<p>To download binary releases of Kurento components visit <a href="http://kurento.org">http://kurento.org</a></p>
+<p>Code for other Kurento projects can be found in the <a href="https://github.com/kurento">GitHub Kurento group</a>.</p>
+<h2>News and Website</h2>
+<p>Information about Kurento can be found on our <a href="http://kurento.org">website</a>.
+Follow us on Twitter @<a href="http://twitter.com/kurentoms">kurentoms</a>.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-KwsMedia.html">KwsMedia</a></li><li><a href="complexTypes_.html">KwsMedia/complexTypes</a></li><li><a href="module-kwsMediaApi.html">kwsMediaApi</a></li><li><a href="complexTypes__.html">kwsMediaApi/complexTypes</a></li><li><a href="core.html">kwsMediaApi/core</a></li><li><a href="endpoints.html">kwsMediaApi/endpoints</a></li><li><a href="filters.html">kwsMediaApi/filters</a></li><li><a href="hubs.html">kwsMediaApi/hubs</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li><li><a href="external-Number.html">Number</a></li><li><a href="external-String.html">String</a></li></ul><h3>Classes</h3><ul><li><a href="core-Endpoint.html">Endpoint</a></li><li><a href="core-Filter.html">Filter</a></li><li><a href="core-Hub.html">Hub</a></li><li><a href="core-HubPort.html">HubPort</a></li><li><a href="core-MediaElement.html">MediaElement</a></li><li><a href="core-MediaObject.html">MediaObject</a></li><li><a href="core-MediaPad.html">MediaPad</a></li><li><a href="core-MediaPipeline.html">MediaPipeline</a></li><li><a href="core-MediaSink.html">MediaSink</a></li><li><a href="core-MediaSource.html">MediaSource</a></li><li><a href="endpoints-HttpEndpoint.html">HttpEndpoint</a></li><li><a href="endpoints-HttpGetEndpoint.html">HttpGetEndpoint</a></li><li><a href="endpoints-HttpPostEndpoint.html">HttpPostEndpoint</a></li><li><a href="endpoints-PlayerEndpoint.html">PlayerEndpoint</a></li><li><a href="endpoints-RecorderEndpoint.html">RecorderEndpoint</a></li><li><a href="endpoints-RtpEndpoint.html">RtpEndpoint</a></li><li><a href="endpoints-SdpEndpoint.html">SdpEndpoint</a></li><li><a href="endpoints-SessionEndpoint.html">SessionEndpoint</a></li><li><a href="endpoints-UriEndpoint.html">UriEndpoint</a></li><li><a href="endpoints-WebRtcEndpoint.html">WebRtcEndpoint</a></li><li><a href="filters-ChromaFilter.html">ChromaFilter</a></li><li><a href="filters-CrowdDetectorFilter.html">CrowdDetectorFilter</a></li><li><a href="filters-FaceOverlayFilter.html">FaceOverlayFilter</a></li><li><a href="filters-GStreamerFilter.html">GStreamerFilter</a></li><li><a href="filters-JackVaderFilter.html">JackVaderFilter</a></li><li><a href="filters-PlateDetectorFilter.html">PlateDetectorFilter</a></li><li><a href="filters-PointerDetectorAdvFilter.html">PointerDetectorAdvFilter</a></li><li><a href="filters-PointerDetectorFilter.html">PointerDetectorFilter</a></li><li><a href="filters-ZBarFilter.html">ZBarFilter</a></li><li><a href="hubs-Composite.html">Composite</a></li><li><a href="hubs-Dispatcher.html">Dispatcher</a></li><li><a href="hubs-DispatcherOneToMany.html">DispatcherOneToMany</a></li><li><a href="module-KwsMedia-KwsMedia.html">KwsMedia</a></li></ul><h3>Global</h3><ul><li><a href="global.html#promiseCallback">promiseCallback</a></li><li><a href="global.html#QUnit">QUnit</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Jul 11 2014 12:47:55 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

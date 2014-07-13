@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/endpoints/UriEndpoint.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: lib/endpoints/UriEndpoint.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+ * (C) Copyright 2013-2014 Kurento (http://kurento.org/)
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser General Public License
+ * (LGPL) version 2.1 which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-2.1.html
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ */
+
+var inherits = require('inherits');
+
+var checkType = require('../checkType');
+
+
+/**
+ * Media API for the Kurento Web SDK
+ *
+ * @module kwsMediaApi/endpoints
+ *
+ * @copyright 2013-2014 Kurento (http://kurento.org/)
+ * @license LGPL
+ */
+
+var Endpoint = require('../core/Endpoint');
+
+
+/**
+ * Interface for endpoints the require a URI to work. An example of this, would be a :rom:cls:`PlayerEndpoint` whose URI property could be used to locate a file to stream through its :rom:cls:`MediaSource`
+ *
+ * @abstract
+ * @class   module:kwsMediaApi/endpoints~UriEndpoint
+ * @extends module:kwsMediaApi~Endpoint
+ */
+
+/**
+ * @constructor
+ *
+ * @param {string} id
+ */
+function UriEndpoint(id)
+{
+  Endpoint.call(this, id);
+};
+inherits(UriEndpoint, Endpoint);
+
+
+/**
+ * Returns the uri for this endpoint.
+ *
+ * @param {module:kwsMediaApi/endpoints~UriEndpoint.getUriCallback} [callback]
+ *
+ * @return {module:kwsMediaApi/endpoints~UriEndpoint}
+ *  The own media object
+ */
+UriEndpoint.prototype.getUri = function(callback){
+  return this.invoke('getUri', callback);
+};
+/**
+ * @callback UriEndpoint~getUriCallback
+ * @param {Error} error
+ * @param {String} result
+ *  the uri as a String
+ */
+
+/**
+ * Pauses the feed
+ *
+ * @param {module:kwsMediaApi/endpoints~UriEndpoint.pauseCallback} [callback]
+ *
+ * @return {module:kwsMediaApi/endpoints~UriEndpoint}
+ *  The own media object
+ */
+UriEndpoint.prototype.pause = function(callback){
+  return this.invoke('pause', callback);
+};
+/**
+ * @callback UriEndpoint~pauseCallback
+ * @param {Error} error
+ */
+
+/**
+ * Stops the feed
+ *
+ * @param {module:kwsMediaApi/endpoints~UriEndpoint.stopCallback} [callback]
+ *
+ * @return {module:kwsMediaApi/endpoints~UriEndpoint}
+ *  The own media object
+ */
+UriEndpoint.prototype.stop = function(callback){
+  return this.invoke('stop', callback);
+};
+/**
+ * @callback UriEndpoint~stopCallback
+ * @param {Error} error
+ */
+
+
+/**
+ * @type module:kwsMediaApi/endpoints~UriEndpoint.constructorParams
+ */
+UriEndpoint.constructorParams = {};
+
+/**
+ * @type   module:kwsMediaApi/endpoints~UriEndpoint.events
+ * @extend module:kwsMediaApi~Endpoint.events
+ */
+UriEndpoint.events = [];
+UriEndpoint.events.concat(Endpoint.events);
+
+
+module.exports = UriEndpoint;
+
+
+UriEndpoint.check = function(key, value)
+{
+  if(!(value instanceof UriEndpoint))
+    throw SyntaxError(key+' param should be a UriEndpoint, not '+typeof value);
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-KwsMedia.html">KwsMedia</a></li><li><a href="complexTypes_.html">KwsMedia/complexTypes</a></li><li><a href="module-kwsMediaApi.html">kwsMediaApi</a></li><li><a href="complexTypes__.html">kwsMediaApi/complexTypes</a></li><li><a href="core.html">kwsMediaApi/core</a></li><li><a href="endpoints.html">kwsMediaApi/endpoints</a></li><li><a href="filters.html">kwsMediaApi/filters</a></li><li><a href="hubs.html">kwsMediaApi/hubs</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li><li><a href="external-Number.html">Number</a></li><li><a href="external-String.html">String</a></li></ul><h3>Classes</h3><ul><li><a href="core-Endpoint.html">Endpoint</a></li><li><a href="core-Filter.html">Filter</a></li><li><a href="core-Hub.html">Hub</a></li><li><a href="core-HubPort.html">HubPort</a></li><li><a href="core-MediaElement.html">MediaElement</a></li><li><a href="core-MediaObject.html">MediaObject</a></li><li><a href="core-MediaPad.html">MediaPad</a></li><li><a href="core-MediaPipeline.html">MediaPipeline</a></li><li><a href="core-MediaSink.html">MediaSink</a></li><li><a href="core-MediaSource.html">MediaSource</a></li><li><a href="endpoints-HttpEndpoint.html">HttpEndpoint</a></li><li><a href="endpoints-HttpGetEndpoint.html">HttpGetEndpoint</a></li><li><a href="endpoints-HttpPostEndpoint.html">HttpPostEndpoint</a></li><li><a href="endpoints-PlayerEndpoint.html">PlayerEndpoint</a></li><li><a href="endpoints-RecorderEndpoint.html">RecorderEndpoint</a></li><li><a href="endpoints-RtpEndpoint.html">RtpEndpoint</a></li><li><a href="endpoints-SdpEndpoint.html">SdpEndpoint</a></li><li><a href="endpoints-SessionEndpoint.html">SessionEndpoint</a></li><li><a href="endpoints-UriEndpoint.html">UriEndpoint</a></li><li><a href="endpoints-WebRtcEndpoint.html">WebRtcEndpoint</a></li><li><a href="filters-ChromaFilter.html">ChromaFilter</a></li><li><a href="filters-CrowdDetectorFilter.html">CrowdDetectorFilter</a></li><li><a href="filters-FaceOverlayFilter.html">FaceOverlayFilter</a></li><li><a href="filters-GStreamerFilter.html">GStreamerFilter</a></li><li><a href="filters-JackVaderFilter.html">JackVaderFilter</a></li><li><a href="filters-PlateDetectorFilter.html">PlateDetectorFilter</a></li><li><a href="filters-PointerDetectorAdvFilter.html">PointerDetectorAdvFilter</a></li><li><a href="filters-PointerDetectorFilter.html">PointerDetectorFilter</a></li><li><a href="filters-ZBarFilter.html">ZBarFilter</a></li><li><a href="hubs-Composite.html">Composite</a></li><li><a href="hubs-Dispatcher.html">Dispatcher</a></li><li><a href="hubs-DispatcherOneToMany.html">DispatcherOneToMany</a></li><li><a href="module-KwsMedia-KwsMedia.html">KwsMedia</a></li></ul><h3>Global</h3><ul><li><a href="global.html#promiseCallback">promiseCallback</a></li><li><a href="global.html#QUnit">QUnit</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Jul 11 2014 12:47:55 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

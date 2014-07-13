@@ -56,7 +56,7 @@ if (navigator.mozGetUserMedia) {
     var url_parts = url.split(':');
     if (url_parts[0].indexOf('stun') === 0) {
       // Create iceServer with stun url.
-      iceServer = {stun:147.83.72.223:254 };
+      iceServer = {stun:147.83.72.223:254'};
     } else if (url_parts[0].indexOf('turn') === 0) {
       if (webrtcDetectedVersion < 27) {
         // Create iceServer with turn url.
@@ -132,7 +132,7 @@ if (navigator.mozGetUserMedia) {
     var url_parts = url.split(':');
     if (url_parts[0].indexOf('stun') === 0) {
       // Create iceServer with stun url.
-      iceServer = {stun:147.83.72.223:254 };
+      iceServer = {'stun:147.83.72.223:254'};
     } else if (url_parts[0].indexOf('turn') === 0) {
       // Chrome M28 & above uses below TURN format.
       iceServer = {'url': url,

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/core/Endpoint.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: lib/core/Endpoint.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+ * (C) Copyright 2013-2014 Kurento (http://kurento.org/)
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser General Public License
+ * (LGPL) version 2.1 which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-2.1.html
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ */
+
+var inherits = require('inherits');
+
+
+/**
+ * Media API for the Kurento Web SDK
+ *
+ * @module kwsMediaApi/core
+ *
+ * @copyright 2013-2014 Kurento (http://kurento.org/)
+ * @license LGPL
+ */
+
+var MediaElement = require('./MediaElement');
+
+
+/**
+ * Base interface for all end points. An Endpoint is a :rom:cls:`MediaElement`
+that allow :term:`KMS` to interchange media contents with external systems,
+supporting different transport protocols and mechanisms, such as :term:`RTP`,
+:term:`WebRTC`, :term:`HTTP`, ``file:/`` URLs... An ``Endpoint`` may
+contain both sources and sinks for different media types, to provide
+bidirectional communication.
+ *
+ * @abstract
+ * @class   module:kwsMediaApi/core~Endpoint
+ * @extends module:kwsMediaApi~MediaElement
+ */
+
+/**
+ * @constructor
+ *
+ * @param {string} id
+ */
+function Endpoint(id)
+{
+  MediaElement.call(this, id);
+};
+inherits(Endpoint, MediaElement);
+
+
+/**
+ * @type module:kwsMediaApi/core~Endpoint.constructorParams
+ */
+Endpoint.constructorParams = {};
+
+/**
+ * @type   module:kwsMediaApi/core~Endpoint.events
+ * @extend module:kwsMediaApi~MediaElement.events
+ */
+Endpoint.events = [];
+Endpoint.events.concat(MediaElement.events);
+
+
+module.exports = Endpoint;
+
+
+Endpoint.check = function(key, value)
+{
+  if(!(value instanceof Endpoint))
+    throw SyntaxError(key+' param should be a Endpoint, not '+typeof value);
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-KwsMedia.html">KwsMedia</a></li><li><a href="complexTypes_.html">KwsMedia/complexTypes</a></li><li><a href="module-kwsMediaApi.html">kwsMediaApi</a></li><li><a href="complexTypes__.html">kwsMediaApi/complexTypes</a></li><li><a href="core.html">kwsMediaApi/core</a></li><li><a href="endpoints.html">kwsMediaApi/endpoints</a></li><li><a href="filters.html">kwsMediaApi/filters</a></li><li><a href="hubs.html">kwsMediaApi/hubs</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li><li><a href="external-Number.html">Number</a></li><li><a href="external-String.html">String</a></li></ul><h3>Classes</h3><ul><li><a href="core-Endpoint.html">Endpoint</a></li><li><a href="core-Filter.html">Filter</a></li><li><a href="core-Hub.html">Hub</a></li><li><a href="core-HubPort.html">HubPort</a></li><li><a href="core-MediaElement.html">MediaElement</a></li><li><a href="core-MediaObject.html">MediaObject</a></li><li><a href="core-MediaPad.html">MediaPad</a></li><li><a href="core-MediaPipeline.html">MediaPipeline</a></li><li><a href="core-MediaSink.html">MediaSink</a></li><li><a href="core-MediaSource.html">MediaSource</a></li><li><a href="endpoints-HttpEndpoint.html">HttpEndpoint</a></li><li><a href="endpoints-HttpGetEndpoint.html">HttpGetEndpoint</a></li><li><a href="endpoints-HttpPostEndpoint.html">HttpPostEndpoint</a></li><li><a href="endpoints-PlayerEndpoint.html">PlayerEndpoint</a></li><li><a href="endpoints-RecorderEndpoint.html">RecorderEndpoint</a></li><li><a href="endpoints-RtpEndpoint.html">RtpEndpoint</a></li><li><a href="endpoints-SdpEndpoint.html">SdpEndpoint</a></li><li><a href="endpoints-SessionEndpoint.html">SessionEndpoint</a></li><li><a href="endpoints-UriEndpoint.html">UriEndpoint</a></li><li><a href="endpoints-WebRtcEndpoint.html">WebRtcEndpoint</a></li><li><a href="filters-ChromaFilter.html">ChromaFilter</a></li><li><a href="filters-CrowdDetectorFilter.html">CrowdDetectorFilter</a></li><li><a href="filters-FaceOverlayFilter.html">FaceOverlayFilter</a></li><li><a href="filters-GStreamerFilter.html">GStreamerFilter</a></li><li><a href="filters-JackVaderFilter.html">JackVaderFilter</a></li><li><a href="filters-PlateDetectorFilter.html">PlateDetectorFilter</a></li><li><a href="filters-PointerDetectorAdvFilter.html">PointerDetectorAdvFilter</a></li><li><a href="filters-PointerDetectorFilter.html">PointerDetectorFilter</a></li><li><a href="filters-ZBarFilter.html">ZBarFilter</a></li><li><a href="hubs-Composite.html">Composite</a></li><li><a href="hubs-Dispatcher.html">Dispatcher</a></li><li><a href="hubs-DispatcherOneToMany.html">DispatcherOneToMany</a></li><li><a href="module-KwsMedia-KwsMedia.html">KwsMedia</a></li></ul><h3>Global</h3><ul><li><a href="global.html#promiseCallback">promiseCallback</a></li><li><a href="global.html#QUnit">QUnit</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Jul 11 2014 12:47:55 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
